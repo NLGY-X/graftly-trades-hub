@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { 
   LayoutDashboard, 
-  Briefcase, 
   FileText, 
-  Users, 
+  Briefcase, 
   Receipt, 
+  Users, 
   Package, 
   Settings,
   ChevronLeft,
@@ -33,9 +33,9 @@ const sidebarItems: SidebarItem[] = [
     path: "/dashboard"
   },
   {
-    title: "Jobs",
-    icon: Briefcase,
-    path: "/jobs"
+    title: "Enquiries",
+    icon: Receipt,
+    path: "/enquiries"
   },
   {
     title: "Quotes",
@@ -43,19 +43,19 @@ const sidebarItems: SidebarItem[] = [
     path: "/quotes"
   },
   {
-    title: "Clients",
-    icon: Users,
-    path: "/clients"
-  },
-  {
-    title: "Enquiries",
-    icon: Receipt,
-    path: "/enquiries"
+    title: "Jobs",
+    icon: Briefcase,
+    path: "/jobs"
   },
   {
     title: "Invoices",
     icon: Receipt,
     path: "/invoices"
+  },
+  {
+    title: "Clients",
+    icon: Users,
+    path: "/clients"
   },
   {
     title: "Materials",
