@@ -48,6 +48,11 @@ const sidebarItems: SidebarItem[] = [
     path: "/clients"
   },
   {
+    title: "Enquiries",
+    icon: Receipt,
+    path: "/enquiries"
+  },
+  {
     title: "Invoices",
     icon: Receipt,
     path: "/invoices"
