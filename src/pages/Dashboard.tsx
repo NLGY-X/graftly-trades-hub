@@ -1,9 +1,11 @@
+
 import { useState } from "react";
 import { Wallet, Clock, UserSquare2, CalendarCheck2, CloudSun, ChevronUp, ChevronDown } from "lucide-react";
 import { StatsCard } from "@/components/dashboard/StatsCard";
 import { JobCard } from "@/components/dashboard/JobCard";
 import { CalendarView } from "@/components/dashboard/CalendarView";
 import { NotificationList } from "@/components/dashboard/NotificationList";
+import { ActionButtons } from "@/components/dashboard/ActionButtons";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Button } from "@/components/ui/button";
 
@@ -114,6 +116,9 @@ export default function Dashboard() {
           className="border-l-4 border-l-accent"
         />
       </div>
+      
+      {/* Quick Action Buttons */}
+      <ActionButtons />
       
       {/* Main Content */}
       <div className="grid gap-6 lg:grid-cols-12">
