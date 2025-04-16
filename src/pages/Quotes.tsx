@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { PlusIcon, SearchIcon, FilterIcon, FilePlus, Clock, CheckCircle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,8 +6,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useModal } from "@/contexts/ModalContext";
 
-// Mock data for quotes
 const allQuotes = [
   {
     id: "quote1",
@@ -70,19 +69,23 @@ const statusConfig = {
 
 export default function Quotes() {
   const [searchTerm, setSearchTerm] = useState('');
+  const { openModal } = useModal();
+  
+  const handleNewQuote = () => {
+    openModal("newQuote");
+  };
   
   return (
     <div className="space-y-6 pb-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h2 className="text-2xl font-bold tracking-tight">Quotes Manager</h2>
-        <Button>
+        <Button onClick={handleNewQuote}>
           <PlusIcon className="mr-2 h-4 w-4" />
           New Quote
         </Button>
       </div>
       
       <div className="flex flex-col gap-4 md:flex-row">
-        {/* Search */}
         <div className="relative flex-1">
           <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input 
@@ -94,7 +97,6 @@ export default function Quotes() {
           />
         </div>
         
-        {/* Filters */}
         <div className="flex gap-2">
           <Select defaultValue="all">
             <SelectTrigger className="w-[140px]">
@@ -114,7 +116,6 @@ export default function Quotes() {
         </div>
       </div>
       
-      {/* Tabs */}
       <Tabs defaultValue="all">
         <TabsList>
           <TabsTrigger value="all">All Quotes</TabsTrigger>
