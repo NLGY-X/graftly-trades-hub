@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { CalendarIcon, GridIcon, ListIcon, PlusIcon, SearchIcon, FilterIcon } from "lucide-react";
+import { CalendarIcon, GridIcon, ListIcon, PlusIcon, SearchIcon, FilterIcon, Hammer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { JobCard } from "@/components/dashboard/JobCard";
+import { useModal } from "@/contexts/ModalContext";
 
 // Mock data for jobs
 const allJobs = [
@@ -68,15 +69,22 @@ const allJobs = [
 
 export default function Jobs() {
   const [view, setView] = useState<"list" | "calendar">("list");
+  const { openModal } = useModal();
   
   return (
     <div className="space-y-6 pb-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h2 className="text-2xl font-bold tracking-tight">Jobs</h2>
-        <Button>
-          <PlusIcon className="mr-2 h-4 w-4" />
-          New Job
-        </Button>
+        <div className="flex gap-2">
+          <Button onClick={() => openModal("jobManagement")}>
+            <Hammer className="mr-2 h-4 w-4" />
+            Manage Job
+          </Button>
+          <Button>
+            <PlusIcon className="mr-2 h-4 w-4" />
+            New Job
+          </Button>
+        </div>
       </div>
       
       <div className="flex flex-col gap-4 md:flex-row">
@@ -142,7 +150,11 @@ export default function Jobs() {
         <TabsContent value="all" className="mt-4 space-y-4">
           {view === "list" ? (
             allJobs.map((job) => (
-              <JobCard key={job.id} job={job} />
+              <JobCard 
+                key={job.id} 
+                job={job} 
+                onClick={() => openModal("jobManagement", { jobId: job.id })} 
+              />
             ))
           ) : (
             <div className="flex h-[400px] items-center justify-center rounded-md border border-dashed">
@@ -162,7 +174,11 @@ export default function Jobs() {
             allJobs
               .filter(job => job.time.includes("Today"))
               .map((job) => (
-                <JobCard key={job.id} job={job} />
+                <JobCard 
+                  key={job.id} 
+                  job={job} 
+                  onClick={() => openModal("jobManagement", { jobId: job.id })} 
+                />
               ))
           ) : (
             <div className="flex h-[400px] items-center justify-center rounded-md border border-dashed">
@@ -177,7 +193,6 @@ export default function Jobs() {
           )}
         </TabsContent>
         
-        {/* Other tabs content would be similar */}
         <TabsContent value="upcoming" className="mt-4">
           {/* Upcoming jobs content */}
         </TabsContent>

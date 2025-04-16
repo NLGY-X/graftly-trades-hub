@@ -23,7 +23,10 @@ import {
   CheckCircle2, 
   Package, 
   Wrench, 
-  Info
+  Info,
+  Camera,
+  FileText,
+  AlertCircle
 } from "lucide-react";
 
 interface JobModalProps {
@@ -42,6 +45,13 @@ const statusOptions = [
 export function JobModal({ open, onOpenChange }: JobModalProps) {
   const [date, setDate] = useState<Date>();
   const [status, setStatus] = useState("scheduled");
+  const [activeTab, setActiveTab] = useState("details");
+
+  // Function to update job status
+  const updateStatus = (newStatus: string) => {
+    setStatus(newStatus);
+    // Here you would typically also make an API call to update the status on the server
+  };
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -80,7 +90,8 @@ export function JobModal({ open, onOpenChange }: JobModalProps) {
                             ? "border-[#059669] bg-[#059669] text-white"
                             : "border-neutral-300 bg-white text-neutral-400"
                       )}
-                      onClick={() => setStatus(option.value)}
+                      onClick={() => updateStatus(option.value)}
+                      aria-label={`Set status to ${option.label}`}
                     >
                       {statusOptions.findIndex(o => o.value === status) >= index ? (
                         <CheckCircle2 className="h-4 w-4" />
@@ -101,7 +112,7 @@ export function JobModal({ open, onOpenChange }: JobModalProps) {
               </div>
             </div>
 
-            <Tabs defaultValue="details" className="w-full">
+            <Tabs defaultValue="details" value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="grid w-full grid-cols-4">
                 <TabsTrigger value="details">Details</TabsTrigger>
                 <TabsTrigger value="schedule">Schedule</TabsTrigger>
@@ -408,6 +419,18 @@ export function JobModal({ open, onOpenChange }: JobModalProps) {
                         These notes will be visible to the client on their job documentation.
                       </div>
                     </div>
+                    
+                    <div className="flex flex-col space-y-2">
+                      <Label>Attachments</Label>
+                      <div className="flex gap-2">
+                        <Button variant="outline" size="sm" className="h-9">
+                          <Camera className="h-3.5 w-3.5 mr-1" /> Add Photos
+                        </Button>
+                        <Button variant="outline" size="sm" className="h-9">
+                          <FileText className="h-3.5 w-3.5 mr-1" /> Add Documents
+                        </Button>
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
               </TabsContent>
@@ -419,6 +442,10 @@ export function JobModal({ open, onOpenChange }: JobModalProps) {
               Cancel
             </Button>
             <div className="flex items-center gap-2">
+              <Button variant="outline" className="gap-1">
+                <AlertCircle className="h-4 w-4" />
+                Report Issue
+              </Button>
               <Button className="bg-[#059669] hover:bg-[#059669]/90">
                 Save Changes
               </Button>
