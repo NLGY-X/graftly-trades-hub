@@ -13,6 +13,7 @@ import Quotes from "./pages/Quotes";
 import Invoices from "./pages/Invoices";
 import Materials from "./pages/Materials";
 import Settings from "./pages/Settings";
+import PublicEnquiry from "./pages/PublicEnquiry";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,8 @@ const App = () => (
             <Route path="/materials" element={<Materials />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
+          {/* Public enquiry page - standalone outside of MainLayout */}
+          <Route path="/enquiry" element={<PublicEnquiry />} />
           {/* Catch-all route */}
           <Route path="*" element={<NotFound />} />
         </Routes>
