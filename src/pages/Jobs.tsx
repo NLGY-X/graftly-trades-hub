@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { CalendarIcon, GridIcon, ListIcon, PlusIcon, SearchIcon, FilterIcon, Hammer } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { JobCard } from "@/components/dashboard/JobCard";
 import { useModal } from "@/contexts/ModalContext";
+import { JobsHeader } from "@/components/jobs/JobsHeader";
+import { JobSearch } from "@/components/jobs/JobSearch";
+import { JobFilters } from "@/components/jobs/JobFilters";
+import { JobList } from "@/components/jobs/JobList";
 
 // Mock data for jobs
 const allJobs = [
@@ -69,76 +68,58 @@ const allJobs = [
 
 export default function Jobs() {
   const [view, setView] = useState<"list" | "calendar">("list");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
   const { openModal } = useModal();
+  
+  const handleManageJob = () => {
+    openModal("jobManagement");
+  };
+  
+  const handleNewJob = () => {
+    console.log("New job button clicked");
+  };
+  
+  const handleJobClick = (jobId: string) => {
+    openModal("jobManagement", { jobId });
+  };
+
+  const filterJobs = (jobs: typeof allJobs, tabValue: string) => {
+    return jobs
+      .filter(job => 
+        tabValue === "all" || 
+        (tabValue === "today" && job.time.includes("Today")) ||
+        (tabValue === "upcoming" && job.time.includes("Tomorrow")) ||
+        (tabValue === "completed" && job.status === "completed")
+      )
+      .filter(job => 
+        statusFilter === "all" || job.status === statusFilter
+      )
+      .filter(job => 
+        searchTerm === "" || 
+        job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        job.client.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        job.location.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+  };
   
   return (
     <div className="space-y-6 pb-8">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h2 className="text-2xl font-bold tracking-tight">Jobs</h2>
-        <div className="flex gap-2">
-          <Button onClick={() => openModal("jobManagement")}>
-            <Hammer className="mr-2 h-4 w-4" />
-            Manage Job
-          </Button>
-          <Button>
-            <PlusIcon className="mr-2 h-4 w-4" />
-            New Job
-          </Button>
-        </div>
-      </div>
+      <JobsHeader 
+        onNewJob={handleNewJob} 
+        onManageJob={handleManageJob} 
+      />
       
       <div className="flex flex-col gap-4 md:flex-row">
-        {/* Search */}
-        <div className="relative flex-1">
-          <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input 
-            type="search" 
-            placeholder="Search jobs, clients, or locations..." 
-            className="w-full pl-8"
-          />
-        </div>
+        <JobSearch onSearch={setSearchTerm} />
         
-        {/* Filters */}
-        <div className="flex gap-2">
-          <Select defaultValue="all">
-            <SelectTrigger className="w-[120px]">
-              <SelectValue placeholder="Status" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Status</SelectItem>
-              <SelectItem value="scheduled">Scheduled</SelectItem>
-              <SelectItem value="in-progress">In Progress</SelectItem>
-              <SelectItem value="completed">Completed</SelectItem>
-              <SelectItem value="cancelled">Cancelled</SelectItem>
-            </SelectContent>
-          </Select>
-          
-          <Button variant="outline" size="icon">
-            <FilterIcon className="h-4 w-4" />
-          </Button>
-          
-          <div className="flex items-center rounded-md border bg-background">
-            <Button
-              variant="ghost"
-              size="icon"
-              className={`rounded-none ${view === 'list' ? 'bg-muted' : ''}`}
-              onClick={() => setView("list")}
-            >
-              <ListIcon className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className={`rounded-none ${view === 'calendar' ? 'bg-muted' : ''}`}
-              onClick={() => setView("calendar")}
-            >
-              <CalendarIcon className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
+        <JobFilters 
+          view={view} 
+          setView={setView}
+          onStatusChange={setStatusFilter}
+        />
       </div>
       
-      {/* Tabs */}
       <Tabs defaultValue="all">
         <TabsList>
           <TabsTrigger value="all">All Jobs</TabsTrigger>
@@ -147,58 +128,36 @@ export default function Jobs() {
           <TabsTrigger value="completed">Completed</TabsTrigger>
         </TabsList>
         
-        <TabsContent value="all" className="mt-4 space-y-4">
-          {view === "list" ? (
-            allJobs.map((job) => (
-              <JobCard 
-                key={job.id} 
-                job={job} 
-                onClick={() => openModal("jobManagement", { jobId: job.id })} 
-              />
-            ))
-          ) : (
-            <div className="flex h-[400px] items-center justify-center rounded-md border border-dashed">
-              <div className="text-center">
-                <CalendarIcon className="mx-auto h-12 w-12 text-muted-foreground" />
-                <h3 className="mt-2 text-lg font-medium">Calendar View</h3>
-                <p className="text-sm text-muted-foreground">
-                  Calendar view will be available in a future update.
-                </p>
-              </div>
-            </div>
-          )}
+        <TabsContent value="all" className="mt-4">
+          <JobList 
+            jobs={filterJobs(allJobs, "all")} 
+            view={view} 
+            onJobClick={handleJobClick} 
+          />
         </TabsContent>
         
-        <TabsContent value="today" className="mt-4 space-y-4">
-          {view === "list" ? (
-            allJobs
-              .filter(job => job.time.includes("Today"))
-              .map((job) => (
-                <JobCard 
-                  key={job.id} 
-                  job={job} 
-                  onClick={() => openModal("jobManagement", { jobId: job.id })} 
-                />
-              ))
-          ) : (
-            <div className="flex h-[400px] items-center justify-center rounded-md border border-dashed">
-              <div className="text-center">
-                <CalendarIcon className="mx-auto h-12 w-12 text-muted-foreground" />
-                <h3 className="mt-2 text-lg font-medium">Calendar View</h3>
-                <p className="text-sm text-muted-foreground">
-                  Calendar view will be available in a future update.
-                </p>
-              </div>
-            </div>
-          )}
+        <TabsContent value="today" className="mt-4">
+          <JobList 
+            jobs={filterJobs(allJobs, "today")} 
+            view={view}
+            onJobClick={handleJobClick}
+          />
         </TabsContent>
         
         <TabsContent value="upcoming" className="mt-4">
-          {/* Upcoming jobs content */}
+          <JobList 
+            jobs={filterJobs(allJobs, "upcoming")} 
+            view={view}
+            onJobClick={handleJobClick}
+          />
         </TabsContent>
         
         <TabsContent value="completed" className="mt-4">
-          {/* Completed jobs content */}
+          <JobList 
+            jobs={filterJobs(allJobs, "completed")} 
+            view={view}
+            onJobClick={handleJobClick}
+          />
         </TabsContent>
       </Tabs>
     </div>
