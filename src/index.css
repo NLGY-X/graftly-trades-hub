@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,56 +6,62 @@
 @layer base {
   :root {
     --background: 210 40% 98%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 224 71% 5%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 224 71% 5%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 224 71% 5%;
 
-    --primary: 199 89% 48%;
+    --primary: 226 70% 40%;
+    --primary-light: 226 70% 55%;
+    --primary-dark: 226 70% 30%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 215 20% 65%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 215 14% 34%;
+    --secondary-light: 215 14% 49%;
+    --secondary-dark: 215 14% 24%;
+    --secondary-foreground: 210 40% 98%;
 
-    --success: 142 76% 36%;
+    --accent: 25 95% 53%;
+    --accent-light: 25 95% 68%;
+    --accent-dark: 25 95% 43%;
+    --accent-foreground: 210 40% 98%;
+
+    --success: 142.1 76.2% 36.3%;
     --success-foreground: 210 40% 98%;
 
     --warning: 38 92% 50%;
-    --warning-foreground: 210 40% 98%;
+    --warning-foreground: 224 71% 5%;
 
-    --danger: 0 84% 60%;
-    --danger-foreground: 210 40% 98%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --info: 217 91% 60%;
+    --info-foreground: 210 40% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
+    --muted: 214 32% 91%;
+    --muted-foreground: 215 14% 34%;
+
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 199 89% 48%;
+    --ring: 226 70% 40%;
 
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 199 89% 48%;
+    --sidebar-foreground: 215 14% 34%;
+    --sidebar-primary: 226 70% 40%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 199 89% 48%;
+    --sidebar-accent: 25 95% 53%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 214.3 31.8% 91.4%;
+    --sidebar-ring: 226 70% 40%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 224 71% 5%;
     --foreground: 210 40% 98%;
 
     --card: 222.2 84% 4.9%;
@@ -63,32 +70,48 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 226 70% 40%;
+    --primary-light: 226 70% 55%;
+    --primary-dark: 226 70% 30%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 215 14% 34%;
+    --secondary-light: 215 14% 49%;
+    --secondary-dark: 215 14% 24%;
     --secondary-foreground: 210 40% 98%;
+
+    --accent: 25 95% 53%;
+    --accent-light: 25 95% 68%;
+    --accent-dark: 25 95% 43%;
+    --accent-foreground: 210 40% 98%;
+
+    --success: 142.1 76.2% 36.3%;
+    --success-foreground: 210 40% 98%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 210 40% 98%;
+
+    --info: 217 91% 60%;
+    --info-foreground: 210 40% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
 
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --ring: 226 70% 40%;
+
+    --sidebar-background: 222.2 84% 4.9%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 226 70% 40%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 25 95% 53%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217.2 32.6% 17.5%;
+    --sidebar-ring: 226 70% 40%;
   }
 }
 
@@ -101,3 +124,50 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Now we'll update the Badge component to support our new variants */
+<lov-write file_path="src/components/ui/badge.tsx">
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
+
+import { cn } from "@/lib/utils"
+
+const badgeVariants = cva(
+  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  {
+    variants: {
+      variant: {
+        default:
+          "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
+        secondary:
+          "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        destructive:
+          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
+        outline: "text-foreground",
+        success: 
+          "border-transparent bg-success text-success-foreground hover:bg-success/80",
+        warning:
+          "border-transparent bg-warning text-warning-foreground hover:bg-warning/80",
+        info:
+          "border-transparent bg-info text-info-foreground hover:bg-info/80",
+        accent:
+          "border-transparent bg-accent text-accent-foreground hover:bg-accent/80",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+)
+
+export interface BadgeProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof badgeVariants> {}
+
+function Badge({ className, variant, ...props }: BadgeProps) {
+  return (
+    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+  )
+}
+
+export { Badge, badgeVariants }
