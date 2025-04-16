@@ -1,5 +1,5 @@
-
 import React, { useState } from "react";
+import { cn } from "@/lib/utils";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -9,7 +9,6 @@ import { ArrowLeft } from "lucide-react";
 import { ClientSection } from "./quote/ClientSection";
 import { QuoteDetailsTab } from "./quote/QuoteDetailsTab";
 import { TermsConditionsTab } from "./quote/TermsConditionsTab";
-import { cn } from "@/lib/utils";
 
 interface QuoteModalProps {
   open: boolean;
