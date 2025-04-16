@@ -64,7 +64,7 @@ const allQuotes = [
 
 const statusConfig = {
   pending: { label: "Pending", variant: "default" as const, icon: Clock },
-  accepted: { label: "Accepted", variant: "success" as const, icon: CheckCircle },
+  accepted: { label: "Accepted", variant: "secondary" as const, icon: CheckCircle },
   declined: { label: "Declined", variant: "destructive" as const, icon: X }
 };
 

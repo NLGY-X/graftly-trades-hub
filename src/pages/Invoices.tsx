@@ -64,7 +64,7 @@ const allInvoices = [
 
 const statusConfig = {
   pending: { label: "Pending", variant: "default" as const, icon: Clock },
-  paid: { label: "Paid", variant: "success" as const, icon: CheckCircle },
+  paid: { label: "Paid", variant: "secondary" as const, icon: CheckCircle },
   overdue: { label: "Overdue", variant: "destructive" as const, icon: AlertTriangle }
 };
 

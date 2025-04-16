@@ -86,8 +86,8 @@ const allMaterials = [
 ];
 
 const reorderStatusConfig = {
-  none: { label: "In Stock", variant: "success" as const, icon: CheckCircle },
-  low: { label: "Low Stock", variant: "warning" as const, icon: AlertCircle },
+  none: { label: "In Stock", variant: "secondary" as const, icon: CheckCircle },
+  low: { label: "Low Stock", variant: "default" as const, icon: AlertCircle },
   ordered: { label: "On Order", variant: "default" as const, icon: ShoppingCart }
 };
 
