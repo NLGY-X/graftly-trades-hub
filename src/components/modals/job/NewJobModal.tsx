@@ -17,9 +17,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MapPin, Calendar, Clock, User, Phone, Mail } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { MapPin, Calendar, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { ClientSelector } from "./ClientSelector";
+import { JobMaterialsTab } from "./JobMaterialsTab";
+import { JobNotesTab } from "./JobNotesTab";
 
 interface NewJobModalProps {
   open: boolean;
@@ -30,9 +32,9 @@ const formSchema = z.object({
   title: z.string().min(1, "Job title is required"),
   client: z.string().min(1, "Client is required"),
   description: z.string().optional(),
-  location: z.string().optional(),
-  date: z.string().optional(),
-  time: z.string().optional(),
+  location: z.string().min(1, "Location is required"),
+  date: z.string().min(1, "Date is required"),
+  time: z.string().min(1, "Time is required"),
   status: z.enum(["scheduled", "in-progress", "on-way", "completed", "cancelled"]).default("scheduled"),
 });
 
@@ -107,32 +109,7 @@ export function NewJobModal({ open, onOpenChange }: NewJobModalProps) {
                         )}
                       />
                       
-                      <FormField
-                        control={form.control}
-                        name="client"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Client</FormLabel>
-                            <Select 
-                              onValueChange={field.onChange} 
-                              defaultValue={field.value}
-                            >
-                              <FormControl>
-                                <SelectTrigger className="bg-white border-neutral-200">
-                                  <SelectValue placeholder="Select a client" />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                <SelectItem value="client1">John & Sarah Thompson</SelectItem>
-                                <SelectItem value="client2">Mike Wilson</SelectItem>
-                                <SelectItem value="client3">Jennifer Garcia</SelectItem>
-                                <SelectItem value="client4">David Mitchell</SelectItem>
-                              </SelectContent>
-                            </Select>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                      <ClientSelector control={form.control} name="client" />
                     </div>
                     
                     <FormField
@@ -249,21 +226,12 @@ export function NewJobModal({ open, onOpenChange }: NewJobModalProps) {
                     />
                   </TabsContent>
                   
-                  <TabsContent value="materials" className="mt-6 space-y-6">
-                    <div className="p-8 flex items-center justify-center border border-dashed rounded-md bg-white">
-                      <div className="text-center">
-                        <p className="text-muted-foreground">Materials section will be available in a future update.</p>
-                      </div>
-                    </div>
+                  <TabsContent value="materials" className="mt-6">
+                    <JobMaterialsTab />
                   </TabsContent>
                   
-                  <TabsContent value="notes" className="mt-6 space-y-6">
-                    <div className="space-y-2">
-                      <Textarea 
-                        placeholder="Add job notes here"
-                        className="min-h-[200px] bg-white border-neutral-200" 
-                      />
-                    </div>
+                  <TabsContent value="notes" className="mt-6">
+                    <JobNotesTab />
                   </TabsContent>
                 </Tabs>
               </form>
