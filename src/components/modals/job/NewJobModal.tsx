@@ -6,22 +6,12 @@ import * as z from "zod";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { 
-  Form, 
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage 
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MapPin, Calendar, Clock } from "lucide-react";
+import { Form } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
-import { ClientSelector } from "./ClientSelector";
 import { JobMaterialsTab } from "./JobMaterialsTab";
 import { JobNotesTab } from "./JobNotesTab";
+import { JobDetailsFormTab } from "./tabs/JobDetailsFormTab";
+import { JobScheduleFormTab } from "./tabs/JobScheduleFormTab";
 
 interface NewJobModalProps {
   open: boolean;
@@ -93,137 +83,12 @@ export function NewJobModal({ open, onOpenChange }: NewJobModalProps) {
                     <TabsTrigger value="notes">Notes</TabsTrigger>
                   </TabsList>
                   
-                  <TabsContent value="details" className="mt-6 space-y-6">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <FormField
-                        control={form.control}
-                        name="title"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Job Title</FormLabel>
-                            <FormControl>
-                              <Input placeholder="Enter job title" className="bg-white border-neutral-200" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      
-                      <ClientSelector control={form.control} name="client" />
-                    </div>
-                    
-                    <FormField
-                      control={form.control}
-                      name="description"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Description</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              placeholder="Describe the job details"
-                              className="min-h-[100px] bg-white border-neutral-200"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <FormField
-                      control={form.control}
-                      name="location"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Location</FormLabel>
-                          <FormControl>
-                            <div className="relative">
-                              <Input 
-                                placeholder="Enter job location" 
-                                className="bg-white border-neutral-200 pl-9" 
-                                {...field}
-                              />
-                              <MapPin className="absolute left-3 top-2.5 h-4 w-4 text-neutral-500" />
-                            </div>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                  <TabsContent value="details" className="mt-6">
+                    <JobDetailsFormTab control={form.control} />
                   </TabsContent>
                   
-                  <TabsContent value="schedule" className="mt-6 space-y-6">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <FormField
-                        control={form.control}
-                        name="date"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Date</FormLabel>
-                            <FormControl>
-                              <div className="relative">
-                                <Input 
-                                  type="date" 
-                                  className="bg-white border-neutral-200 pl-9" 
-                                  {...field}
-                                />
-                                <Calendar className="absolute left-3 top-2.5 h-4 w-4 text-neutral-500" />
-                              </div>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      
-                      <FormField
-                        control={form.control}
-                        name="time"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Time</FormLabel>
-                            <FormControl>
-                              <div className="relative">
-                                <Input 
-                                  type="time" 
-                                  className="bg-white border-neutral-200 pl-9" 
-                                  {...field}
-                                />
-                                <Clock className="absolute left-3 top-2.5 h-4 w-4 text-neutral-500" />
-                              </div>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                    
-                    <FormField
-                      control={form.control}
-                      name="status"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Status</FormLabel>
-                          <Select 
-                            onValueChange={field.onChange} 
-                            defaultValue={field.value}
-                          >
-                            <FormControl>
-                              <SelectTrigger className="bg-white border-neutral-200">
-                                <SelectValue placeholder="Select status" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="scheduled">Scheduled</SelectItem>
-                              <SelectItem value="in-progress">In Progress</SelectItem>
-                              <SelectItem value="on-way">On Way</SelectItem>
-                              <SelectItem value="completed">Completed</SelectItem>
-                              <SelectItem value="cancelled">Cancelled</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                  <TabsContent value="schedule" className="mt-6">
+                    <JobScheduleFormTab control={form.control} />
                   </TabsContent>
                   
                   <TabsContent value="materials" className="mt-6">
