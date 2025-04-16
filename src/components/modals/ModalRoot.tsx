@@ -3,7 +3,7 @@ import React from "react";
 import { useModal } from "@/contexts/ModalContext";
 import { EnquiryModal } from "./EnquiryModal";
 import { QuoteModal } from "./QuoteModal";
-import { JobModal } from "./JobModal";
+import { JobModal } from "./job/JobModal";
 import { InvoiceModal } from "./InvoiceModal";
 import { PaymentModal } from "./PaymentModal";
 
