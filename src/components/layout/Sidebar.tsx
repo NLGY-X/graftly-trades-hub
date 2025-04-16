@@ -13,8 +13,7 @@ import {
   Package, 
   Settings,
   ChevronLeft,
-  ChevronRight,
-  Home
+  ChevronRight
 } from "lucide-react";
 
 interface SidebarProps {
@@ -28,11 +27,6 @@ interface SidebarItem {
 }
 
 const sidebarItems: SidebarItem[] = [
-  {
-    title: "Home",
-    icon: Home,
-    path: "/"
-  },
   {
     title: "Dashboard",
     icon: LayoutDashboard,
