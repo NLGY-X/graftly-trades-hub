@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useModal } from "@/contexts/ModalContext";
@@ -73,14 +72,6 @@ export default function Jobs() {
   const [statusFilter, setStatusFilter] = useState("all");
   const { openModal } = useModal();
   
-  const handleManageJob = () => {
-    openModal("jobManagement");
-  };
-  
-  const handleNewJob = () => {
-    openModal("newJob");
-  };
-  
   const handleJobClick = (jobId: string) => {
     openModal("jobManagement", { jobId });
   };
@@ -106,10 +97,7 @@ export default function Jobs() {
   
   return (
     <div className="space-y-6 pb-8">
-      <JobsHeader 
-        onNewJob={handleNewJob} 
-        onManageJob={handleManageJob} 
-      />
+      <JobsHeader />
       
       <div className="flex flex-col gap-4 md:flex-row">
         <JobSearch onSearch={setSearchTerm} />
