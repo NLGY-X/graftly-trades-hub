@@ -2,6 +2,10 @@
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface CalendarDayProps {
   date: string;
@@ -69,14 +73,55 @@ export function CalendarView() {
     }
   ];
 
+  const [visibleDays, setVisibleDays] = useState<CalendarDayProps[]>(weekDays.slice(0, 5));
+  const [startIndex, setStartIndex] = useState(0);
+
+  const showPreviousDays = () => {
+    if (startIndex > 0) {
+      const newStartIndex = Math.max(0, startIndex - 1);
+      setStartIndex(newStartIndex);
+      setVisibleDays(weekDays.slice(newStartIndex, newStartIndex + 5));
+    }
+  };
+
+  const showNextDays = () => {
+    if (startIndex < weekDays.length - 5) {
+      const newStartIndex = startIndex + 1;
+      setStartIndex(newStartIndex);
+      setVisibleDays(weekDays.slice(newStartIndex, newStartIndex + 5));
+    }
+  };
+
   return (
     <Card className="shadow-sm">
-      <CardHeader className="pb-3 border-b">
-        <CardTitle className="text-lg font-medium">Upcoming Work</CardTitle>
+      <CardHeader className="pb-2 border-b">
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-lg font-medium">Upcoming Work</CardTitle>
+          <div className="flex items-center gap-1">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="h-7 w-7" 
+              onClick={showPreviousDays}
+              disabled={startIndex === 0}
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="h-7 w-7" 
+              onClick={showNextDays}
+              disabled={startIndex >= weekDays.length - 5}
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
       </CardHeader>
-      <CardContent className="p-4">
-        <div className="flex overflow-x-auto pb-3 gap-3 -mx-1 px-1">
-          {weekDays.map((day) => (
+      <CardContent className="p-3">
+        <div className="grid grid-cols-5 gap-2">
+          {visibleDays.map((day) => (
             <CalendarDay key={day.date} {...day} />
           ))}
         </div>
@@ -86,49 +131,54 @@ export function CalendarView() {
 }
 
 function CalendarDay({ date, day, isToday, jobs }: CalendarDayProps) {
+  const [expanded, setExpanded] = useState(false);
+  
   return (
-    <div className="flex-shrink-0 w-[135px]">
+    <div className="w-full">
       <div 
         className={cn(
-          "rounded-lg p-3 mb-3 transition-colors",
+          "rounded-lg p-2 mb-2 transition-colors cursor-pointer",
           isToday 
             ? "bg-primary/10 border border-primary/30" 
             : "border bg-card hover:bg-muted/50"
         )}
+        onClick={() => setExpanded(!expanded)}
       >
         <div className="text-center">
-          <div className={cn("text-sm font-medium", isToday && "text-primary")}>
+          <div className={cn("text-xs font-medium", isToday && "text-primary")}>
             {day}
           </div>
-          <div className={cn("text-2xl font-bold", isToday && "text-primary")}>
+          <div className={cn("text-xl font-bold", isToday && "text-primary")}>
             {date}
           </div>
-          <div className="text-xs text-muted-foreground mt-1">
+          <div className="text-xs text-muted-foreground">
             {jobs.length} {jobs.length === 1 ? "job" : "jobs"}
           </div>
         </div>
       </div>
       
-      <div className="space-y-2">
-        {jobs.length === 0 ? (
-          <div className="text-center text-xs text-muted-foreground p-2 border border-dashed rounded-lg">
-            No jobs scheduled
-          </div>
-        ) : (
-          jobs.map((job) => (
+      {expanded && jobs.length > 0 && (
+        <div className="space-y-1 mt-1">
+          {jobs.map((job) => (
             <div 
               key={job.id} 
-              className="border rounded-lg p-2 text-sm hover:bg-muted/50 transition-colors cursor-pointer"
+              className="border rounded-md p-1.5 text-xs hover:bg-muted/50 transition-colors cursor-pointer"
             >
               <div className="font-medium truncate">{job.title}</div>
-              <div className="text-xs text-muted-foreground mt-1 flex items-center">
-                <span className="w-2 h-2 bg-primary rounded-full mr-1.5"></span>
+              <div className="text-xs text-muted-foreground mt-0.5 flex items-center">
+                <span className="w-1.5 h-1.5 bg-primary rounded-full mr-1"></span>
                 {job.time}
               </div>
             </div>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
+      
+      {expanded && jobs.length === 0 && (
+        <div className="text-center text-xs text-muted-foreground p-1.5 border border-dashed rounded-md">
+          No jobs
+        </div>
+      )}
     </div>
   );
 }
