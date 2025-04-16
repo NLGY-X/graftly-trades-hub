@@ -12,6 +12,7 @@ import Quotes from "./pages/Quotes";
 import Invoices from "./pages/Invoices";
 import Materials from "./pages/Materials";
 import Settings from "./pages/Settings";
+import Enquiries from "./pages/Enquiries";
 import PublicEnquiry from "./pages/PublicEnquiry";
 import NotFound from "./pages/NotFound";
 import { ModalProvider } from "./contexts/ModalContext";
@@ -33,6 +34,7 @@ const App = () => (
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/jobs" element={<Jobs />} />
               <Route path="/clients" element={<Clients />} />
+              <Route path="/enquiries" element={<Enquiries />} />
               <Route path="/quotes" element={<Quotes />} />
               <Route path="/invoices" element={<Invoices />} />
               <Route path="/materials" element={<Materials />} />
