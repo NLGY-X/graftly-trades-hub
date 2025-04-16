@@ -1,6 +1,7 @@
 
 import { PlusIcon, Hammer } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useModal } from "@/contexts/ModalContext";
 
 interface JobsHeaderProps {
   onNewJob: () => void;

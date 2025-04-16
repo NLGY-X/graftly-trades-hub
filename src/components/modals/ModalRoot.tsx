@@ -4,6 +4,7 @@ import { useModal } from "@/contexts/ModalContext";
 import { EnquiryModal } from "./EnquiryModal";
 import { QuoteModal } from "./QuoteModal";
 import { JobModal } from "./job/JobModal";
+import { NewJobModal } from "./job/NewJobModal";
 import { InvoiceModal } from "./InvoiceModal";
 import { PaymentModal } from "./PaymentModal";
 
@@ -28,6 +29,12 @@ export function ModalRoot() {
         open={modalType === "jobManagement"} 
         onOpenChange={(open) => !open && closeModal()} 
         {...(modalType === "jobManagement" ? modalProps : {})}
+      />
+      
+      <NewJobModal 
+        open={modalType === "newJob"} 
+        onOpenChange={(open) => !open && closeModal()} 
+        {...(modalType === "newJob" ? modalProps : {})}
       />
       
       <InvoiceModal 

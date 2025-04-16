@@ -5,6 +5,7 @@ export type ModalType =
   | "newEnquiry" 
   | "newQuote" 
   | "jobManagement" 
+  | "newJob"
   | "invoice" 
   | "paymentRecording"
   | null;

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useModal } from "@/contexts/ModalContext";
@@ -77,7 +78,7 @@ export default function Jobs() {
   };
   
   const handleNewJob = () => {
-    console.log("New job button clicked");
+    openModal("newJob");
   };
   
   const handleJobClick = (jobId: string) => {
