@@ -9,6 +9,7 @@ import { ArrowLeft } from "lucide-react";
 import { ClientSection } from "./quote/ClientSection";
 import { QuoteDetailsTab } from "./quote/QuoteDetailsTab";
 import { TermsConditionsTab } from "./quote/TermsConditionsTab";
+import { cn } from "@/lib/utils";
 
 interface QuoteModalProps {
   open: boolean;
