@@ -71,48 +71,52 @@ const notifications = [
 
 export default function Dashboard() {
   return (
-    <div className="space-y-6 pb-8">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold tracking-tight">Dashboard</h2>
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <CloudSun className="h-4 w-4" />
+    <div className="space-y-8 pb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <h2 className="text-3xl font-bold tracking-tight text-primary-dark">Dashboard</h2>
+        <div className="flex items-center gap-2 text-sm bg-muted/50 px-3 py-1.5 rounded-full">
+          <CloudSun className="h-4 w-4 text-accent" />
           <span>21°C, Mostly Sunny</span>
         </div>
       </div>
       
       {/* Stats Row */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         <StatsCard
           title="Outstanding Invoices"
           value="£4,250.00"
           icon={<Wallet className="h-4 w-4" />}
           trend={{ value: "12%", positive: false }}
+          className="border-l-4 border-l-destructive"
         />
         <StatsCard
           title="Jobs Today"
           value="3"
           icon={<Clock className="h-4 w-4" />}
+          className="border-l-4 border-l-primary"
         />
         <StatsCard
           title="Active Clients"
           value="18"
           icon={<UserSquare2 className="h-4 w-4" />}
           trend={{ value: "4%", positive: true }}
+          className="border-l-4 border-l-success"
         />
         <StatsCard
           title="Completed This Week"
           value="7"
           icon={<CalendarCheck2 className="h-4 w-4" />}
+          className="border-l-4 border-l-accent"
         />
       </div>
       
       {/* Main Content */}
-      <div className="grid gap-6 md:grid-cols-12">
+      <div className="grid gap-8 lg:grid-cols-12">
         {/* Left Column - Today's Jobs */}
-        <div className="space-y-6 md:col-span-7 lg:col-span-8">
-          <div>
-            <h3 className="mb-4 text-lg font-medium">Today's Jobs</h3>
-            <div className="space-y-4">
+        <div className="space-y-8 lg:col-span-7 xl:col-span-8">
+          <div className="bg-card rounded-lg p-5 border shadow-sm">
+            <h3 className="mb-5 text-lg font-medium border-b pb-3">Today's Jobs</h3>
+            <div className="space-y-5">
               {todaysJobs.map((job) => (
                 <JobCard key={job.id} job={job} />
               ))}
@@ -123,7 +127,7 @@ export default function Dashboard() {
         </div>
         
         {/* Right Column - Notifications */}
-        <div className="md:col-span-5 lg:col-span-4">
+        <div className="lg:col-span-5 xl:col-span-4">
           <NotificationList notifications={notifications} />
         </div>
       </div>

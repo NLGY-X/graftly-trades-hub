@@ -70,12 +70,12 @@ export function CalendarView() {
   ];
 
   return (
-    <Card>
-      <CardHeader className="pb-3">
-        <CardTitle className="text-md">Upcoming Work</CardTitle>
+    <Card className="shadow-sm">
+      <CardHeader className="pb-3 border-b">
+        <CardTitle className="text-lg font-medium">Upcoming Work</CardTitle>
       </CardHeader>
-      <CardContent className="px-1">
-        <div className="flex overflow-x-auto pb-2 -mx-1 px-1">
+      <CardContent className="p-4">
+        <div className="flex overflow-x-auto pb-3 gap-3 -mx-1 px-1">
           {weekDays.map((day) => (
             <CalendarDay key={day.date} {...day} />
           ))}
@@ -87,21 +87,23 @@ export function CalendarView() {
 
 function CalendarDay({ date, day, isToday, jobs }: CalendarDayProps) {
   return (
-    <div className="flex-shrink-0 w-[130px] px-2">
+    <div className="flex-shrink-0 w-[135px]">
       <div 
         className={cn(
-          "rounded-md p-2 mb-2",
-          isToday ? "bg-primary/10" : "border bg-card"
+          "rounded-lg p-3 mb-3 transition-colors",
+          isToday 
+            ? "bg-primary/10 border border-primary/30" 
+            : "border bg-card hover:bg-muted/50"
         )}
       >
         <div className="text-center">
           <div className={cn("text-sm font-medium", isToday && "text-primary")}>
             {day}
           </div>
-          <div className={cn("text-xl font-bold", isToday && "text-primary")}>
+          <div className={cn("text-2xl font-bold", isToday && "text-primary")}>
             {date}
           </div>
-          <div className="text-xs text-muted-foreground">
+          <div className="text-xs text-muted-foreground mt-1">
             {jobs.length} {jobs.length === 1 ? "job" : "jobs"}
           </div>
         </div>
@@ -109,17 +111,20 @@ function CalendarDay({ date, day, isToday, jobs }: CalendarDayProps) {
       
       <div className="space-y-2">
         {jobs.length === 0 ? (
-          <div className="text-center text-xs text-muted-foreground p-2">
+          <div className="text-center text-xs text-muted-foreground p-2 border border-dashed rounded-lg">
             No jobs scheduled
           </div>
         ) : (
           jobs.map((job) => (
             <div 
               key={job.id} 
-              className="border rounded-md p-2 text-sm"
+              className="border rounded-lg p-2 text-sm hover:bg-muted/50 transition-colors cursor-pointer"
             >
               <div className="font-medium truncate">{job.title}</div>
-              <div className="text-xs text-muted-foreground">{job.time}</div>
+              <div className="text-xs text-muted-foreground mt-1 flex items-center">
+                <span className="w-2 h-2 bg-primary rounded-full mr-1.5"></span>
+                {job.time}
+              </div>
             </div>
           ))
         )}

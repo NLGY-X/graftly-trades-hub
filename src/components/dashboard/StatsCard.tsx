@@ -23,27 +23,27 @@ export function StatsCard({
   className,
 }: StatsCardProps) {
   return (
-    <Card className={cn("overflow-hidden", className)}>
-      <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-sm font-medium">{title}</CardTitle>
-        <div className="h-4 w-4 text-muted-foreground">{icon}</div>
+    <Card className={cn("overflow-hidden transition-all hover:shadow-md", className)}>
+      <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+        <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
+        <div className="h-5 w-5 text-muted-foreground">{icon}</div>
       </CardHeader>
       <CardContent>
         <div className="text-2xl font-bold">{value}</div>
         {description && (
-          <p className="text-xs text-muted-foreground">{description}</p>
+          <p className="text-xs text-muted-foreground mt-1">{description}</p>
         )}
         {trend && (
-          <div className="mt-1 flex items-center text-xs">
+          <div className="mt-2 flex items-center text-xs font-medium">
             <span
               className={cn(
-                "mr-1",
-                trend.positive ? "text-success" : "text-destructive"
+                "flex items-center gap-1 rounded-full px-1.5 py-0.5",
+                trend.positive ? "bg-success/10 text-success" : "bg-destructive/10 text-destructive"
               )}
             >
               {trend.positive ? "↑" : "↓"} {trend.value}
             </span>
-            <span className="text-muted-foreground">vs last month</span>
+            <span className="text-muted-foreground ml-2">vs last month</span>
           </div>
         )}
       </CardContent>
