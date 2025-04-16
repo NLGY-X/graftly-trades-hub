@@ -35,7 +35,7 @@ export function PaymentModal({
     toast({
       title: "Payment Recorded",
       description: `£${amount.toFixed(2)} payment recorded for invoice ${invoiceRef}`,
-      variant: "success"
+      variant: "default"
     });
     onOpenChange(false);
   };
