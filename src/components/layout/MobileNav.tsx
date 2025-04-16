@@ -18,7 +18,7 @@ const navItems = [
   {
     title: "Dashboard",
     icon: LayoutDashboard,
-    path: "/"
+    path: "/dashboard"
   },
   {
     title: "Jobs",
