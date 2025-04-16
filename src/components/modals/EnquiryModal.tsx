@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { CalendarIcon, Mic, ImagePlus, MapPin, ChevronDown, ChevronUp } from "lucide-react";
+import { CalendarIcon, Mic, ImagePlus, MapPin, ArrowLeft } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -48,12 +48,23 @@ export function EnquiryModal({ open, onOpenChange, enquiryId, isEditing = false 
   if (isMobile) {
     return (
       <Drawer open={open} onOpenChange={onOpenChange}>
-        <DrawerContent className="bg-[#F3F0FF] border-t border-[#7E22CE]/30">
+        <DrawerContent className="bg-[#F3F0FF] border-t border-[#7E22CE]/30 max-h-[90vh]">
           <div className="mx-auto mt-4 h-1 w-[32px] rounded-full bg-[#7E22CE]/30" />
-          <DrawerHeader>
-            <DrawerTitle className="text-[#7E22CE]">
-              {isEditing ? "Edit Enquiry" : "New Enquiry"}
-            </DrawerTitle>
+          <DrawerHeader className="px-4">
+            <div className="flex items-center mb-1">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="h-8 w-8 mr-2 -ml-2" 
+                onClick={() => onOpenChange(false)}
+              >
+                <ArrowLeft className="h-4 w-4" />
+                <span className="sr-only">Back</span>
+              </Button>
+              <DrawerTitle className="text-[#7E22CE]">
+                {isEditing ? "Edit Enquiry" : "New Enquiry"}
+              </DrawerTitle>
+            </div>
             <DrawerDescription>
               {isEditing 
                 ? "Update the enquiry details" 
@@ -61,7 +72,7 @@ export function EnquiryModal({ open, onOpenChange, enquiryId, isEditing = false 
             </DrawerDescription>
           </DrawerHeader>
           <form onSubmit={handleSubmit}>
-            <div className="px-4 py-2">
+            <div className="px-4 py-2 overflow-y-auto max-h-[calc(90vh-180px)]">
               <MobileEnquiryForm 
                 date={date} 
                 setDate={setDate} 
@@ -70,11 +81,11 @@ export function EnquiryModal({ open, onOpenChange, enquiryId, isEditing = false 
                 isEditing={isEditing}
               />
             </div>
-            <DrawerFooter className="border-t border-neutral-200 pt-4">
-              <Button type="submit" className="bg-[#7E22CE] hover:bg-[#7E22CE]/90">
+            <DrawerFooter className="border-t border-neutral-200 pt-4 px-4 pb-6 sticky bottom-0 bg-[#F3F0FF]">
+              <Button type="submit" className="bg-[#7E22CE] hover:bg-[#7E22CE]/90 w-full">
                 {isEditing ? "Update Enquiry" : "Submit Enquiry"}
               </Button>
-              <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
+              <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="w-full">
                 Cancel
               </Button>
             </DrawerFooter>
@@ -86,7 +97,7 @@ export function EnquiryModal({ open, onOpenChange, enquiryId, isEditing = false 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-[#F3F0FF] border border-[#7E22CE]/30 max-w-[650px]">
+      <DialogContent className="bg-[#F3F0FF] border border-[#7E22CE]/30 max-w-[650px] max-h-[90vh] overflow-hidden">
         <DialogHeader>
           <DialogTitle className="text-[#7E22CE]">
             {isEditing ? "Edit Enquiry" : "New Enquiry"}
@@ -97,7 +108,7 @@ export function EnquiryModal({ open, onOpenChange, enquiryId, isEditing = false 
               : "Capture client details and requirements"}
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="overflow-y-auto max-h-[calc(90vh-180px)] pr-2">
           <DesktopEnquiryForm 
             date={date} 
             setDate={setDate} 
@@ -107,7 +118,7 @@ export function EnquiryModal({ open, onOpenChange, enquiryId, isEditing = false 
             setIsSiteVisitRequired={setIsSiteVisitRequired}
             isEditing={isEditing}
           />
-          <DialogFooter>
+          <DialogFooter className="mt-4">
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
               Cancel
             </Button>

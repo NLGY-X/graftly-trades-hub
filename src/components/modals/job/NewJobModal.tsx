@@ -8,6 +8,9 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Form } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { ArrowLeft } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { JobMaterialsTab } from "./JobMaterialsTab";
 import { JobNotesTab } from "./JobNotesTab";
 import { JobDetailsFormTab } from "./tabs/JobDetailsFormTab";
@@ -33,6 +36,7 @@ type FormValues = z.infer<typeof formSchema>;
 export function NewJobModal({ open, onOpenChange }: NewJobModalProps) {
   const [activeTab, setActiveTab] = useState("details");
   const { toast } = useToast();
+  const isMobile = useIsMobile();
   
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -63,25 +67,61 @@ export function NewJobModal({ open, onOpenChange }: NewJobModalProps) {
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" className="w-[650px] max-w-full bg-[#ECFDF5] border-l border-[#059669]/30 p-0">
+      <SheetContent 
+        side={isMobile ? "bottom" : "right"} 
+        className={cn(
+          isMobile ? "h-[90vh] rounded-t-xl pb-0 pt-4" : "w-[650px] max-w-full p-0",
+          "bg-[#ECFDF5] border-l border-[#059669]/30"
+        )}
+      >
         <div className="flex flex-col h-full">
-          <div className="flex-shrink-0 p-6 border-b border-neutral-200">
+          <div className="flex-shrink-0 p-4 md:p-6 border-b border-neutral-200">
             <SheetHeader className="text-left">
-              <SheetTitle className="text-[#059669]">New Job</SheetTitle>
+              {isMobile && (
+                <div className="mx-auto mb-4 h-1 w-[32px] rounded-full bg-[#059669]/30" />
+              )}
+              <div className="flex items-center">
+                {isMobile && (
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className="h-8 w-8 mr-2 -ml-2" 
+                    onClick={() => onOpenChange(false)}
+                  >
+                    <ArrowLeft className="h-4 w-4" />
+                    <span className="sr-only">Back</span>
+                  </Button>
+                )}
+                <SheetTitle className="text-[#059669]">New Job</SheetTitle>
+              </div>
               <SheetDescription>Create a new job with client and schedule details</SheetDescription>
             </SheetHeader>
           </div>
 
-          <div className="flex-1 overflow-auto py-6 px-6">
+          <div className="flex-1 overflow-y-auto p-4 md:py-6 md:px-6">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <Tabs defaultValue="details" value={activeTab} onValueChange={setActiveTab} className="w-full">
-                  <TabsList className="grid w-full grid-cols-4">
+                  <TabsList className={cn(
+                    "grid w-full", 
+                    isMobile ? "grid-cols-2" : "grid-cols-4"
+                  )}>
                     <TabsTrigger value="details">Details</TabsTrigger>
                     <TabsTrigger value="schedule">Schedule</TabsTrigger>
-                    <TabsTrigger value="materials">Materials</TabsTrigger>
-                    <TabsTrigger value="notes">Notes</TabsTrigger>
+                    {!isMobile && (
+                      <>
+                        <TabsTrigger value="materials">Materials</TabsTrigger>
+                        <TabsTrigger value="notes">Notes</TabsTrigger>
+                      </>
+                    )}
                   </TabsList>
+                  
+                  {isMobile && (
+                    <TabsList className="grid w-full grid-cols-2 mt-2">
+                      <TabsTrigger value="materials">Materials</TabsTrigger>
+                      <TabsTrigger value="notes">Notes</TabsTrigger>
+                    </TabsList>
+                  )}
                   
                   <TabsContent value="details" className="mt-6">
                     <JobDetailsFormTab control={form.control} />
@@ -103,16 +143,32 @@ export function NewJobModal({ open, onOpenChange }: NewJobModalProps) {
             </Form>
           </div>
 
-          <SheetFooter className="border-t border-neutral-200 p-6 flex flex-row justify-between gap-4">
-            <Button variant="outline" onClick={() => onOpenChange(false)}>
-              Cancel
-            </Button>
-            <Button 
-              className="bg-[#059669] hover:bg-[#059669]/90"
-              onClick={form.handleSubmit(onSubmit)}
-            >
-              Create Job
-            </Button>
+          <SheetFooter className="border-t border-neutral-200 p-4 md:p-6 flex flex-col md:flex-row md:justify-between gap-4 bg-[#ECFDF5]">
+            {isMobile ? (
+              <>
+                <Button 
+                  className="bg-[#059669] hover:bg-[#059669]/90 w-full"
+                  onClick={form.handleSubmit(onSubmit)}
+                >
+                  Create Job
+                </Button>
+                <Button variant="ghost" onClick={() => onOpenChange(false)} className="w-full">
+                  Cancel
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button variant="outline" onClick={() => onOpenChange(false)}>
+                  Cancel
+                </Button>
+                <Button 
+                  className="bg-[#059669] hover:bg-[#059669]/90"
+                  onClick={form.handleSubmit(onSubmit)}
+                >
+                  Create Job
+                </Button>
+              </>
+            )}
           </SheetFooter>
         </div>
       </SheetContent>
