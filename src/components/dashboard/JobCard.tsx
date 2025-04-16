@@ -20,8 +20,8 @@ interface JobCardProps {
 
 const statusConfig: Record<JobStatus, { label: string; variant: "default" | "success" | "secondary" | "destructive" | "warning" | "info" | "accent" | "outline" }> = {
   "scheduled": { label: "Scheduled", variant: "secondary" },
-  "in-progress": { label: "In Progress", variant: "primary" },
-  "on-way": { label: "On Way", variant: "info" },
+  "in-progress": { label: "In Progress", variant: "info" },
+  "on-way": { label: "On Way", variant: "warning" },
   "completed": { label: "Completed", variant: "success" },
   "cancelled": { label: "Cancelled", variant: "destructive" }
 };
@@ -33,9 +33,9 @@ export function JobCard({ job, onClick }: JobCardProps) {
     <Card 
       className={cn(
         "cursor-pointer transition-all hover:shadow-md border-l-4",
-        job.status === "in-progress" ? "border-l-primary" :
+        job.status === "in-progress" ? "border-l-info" :
         job.status === "scheduled" ? "border-l-secondary" :
-        job.status === "on-way" ? "border-l-info" :
+        job.status === "on-way" ? "border-l-warning" :
         job.status === "completed" ? "border-l-success" :
         "border-l-destructive"
       )}
