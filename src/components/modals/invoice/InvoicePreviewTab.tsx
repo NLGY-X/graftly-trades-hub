@@ -3,7 +3,7 @@ import React from "react";
 
 export function InvoicePreviewTab() {
   return (
-    <div className="bg-white border border-neutral-200 rounded-md p-8 max-w-[640px] mx-auto">
+    <div className="bg-white border border-neutral-200 rounded-md p-6 max-w-[640px] mx-auto">
       <div className="flex justify-between items-start">
         <div>
           <h2 className="text-2xl font-bold text-[#F97316]">INVOICE</h2>
@@ -17,7 +17,7 @@ export function InvoicePreviewTab() {
         </div>
       </div>
       
-      <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
           <div className="text-sm font-semibold text-neutral-500">BILL TO</div>
           <div className="mt-1">
@@ -39,7 +39,7 @@ export function InvoicePreviewTab() {
         </div>
       </div>
       
-      <div className="mt-10">
+      <div className="mt-8">
         <div className="grid grid-cols-12 gap-4 py-2 border-b border-neutral-200 font-semibold text-sm text-neutral-500">
           <div className="col-span-6">DESCRIPTION</div>
           <div className="col-span-1 text-right">QTY</div>
@@ -93,8 +93,8 @@ export function InvoicePreviewTab() {
         </div>
       </div>
       
-      <div className="mt-8 pt-8 border-t border-neutral-200">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div className="mt-8 pt-6 border-t border-neutral-200">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <div className="text-sm font-semibold text-neutral-500">PAYMENT TERMS</div>
             <div className="mt-1 text-sm">
@@ -111,7 +111,7 @@ export function InvoicePreviewTab() {
           </div>
         </div>
         
-        <div className="mt-8 text-center text-sm text-neutral-500">
+        <div className="mt-6 text-center text-sm text-neutral-500">
           Thank you for your business. Please contact us if you have any questions.
         </div>
       </div>
