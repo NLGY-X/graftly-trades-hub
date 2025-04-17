@@ -1,3 +1,4 @@
+
 import * as SheetPrimitive from "@radix-ui/react-dialog"
 import { cva, type VariantProps } from "class-variance-authority"
 import { X } from "lucide-react"
@@ -44,6 +45,7 @@ const sheetVariants = cva(
         sm: "w-3/4 sm:max-w-[450px]",
         md: "w-3/4 sm:max-w-[650px]",
         lg: "w-3/4 sm:max-w-[800px]",
+        wide: "w-3/4 sm:max-w-[1000px]", // New wide size
       },
     },
     defaultVariants: {

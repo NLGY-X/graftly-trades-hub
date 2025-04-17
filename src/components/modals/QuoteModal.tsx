@@ -41,7 +41,7 @@ export function QuoteModal({ open, onOpenChange }: QuoteModalProps) {
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent 
         side={isMobile ? "bottom" : "right"} 
-        size="lg"
+        size="wide"
         className={cn(
           isMobile ? "h-[90vh] rounded-t-xl pb-0 pt-4" : "p-0",
           "bg-[#F3F0FF] border-l border-[#7E22CE]/30"
