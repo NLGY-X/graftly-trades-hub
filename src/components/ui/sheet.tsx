@@ -45,7 +45,7 @@ const sheetVariants = cva(
         sm: "w-3/4 sm:max-w-[450px]",
         md: "w-3/4 sm:max-w-[650px]",
         lg: "w-3/4 sm:max-w-[800px]",
-        wide: "w-3/4 sm:max-w-[1000px]", // New wide size
+        wide: "w-5/6 sm:max-w-[1200px]", // Updated wide size to be more spacious
       },
     },
     defaultVariants: {
@@ -70,22 +70,7 @@ const SheetContent = React.forwardRef<
       className={cn(sheetVariants({ side, size }), className)}
       {...props}
     >
-      {side === "bottom" && (
-        <div className="mx-auto mt-4 h-1 w-[32px] rounded-full bg-neutral-300" />
-      )}
-      <div className="flex flex-col h-full">
-        <div className="flex-shrink-0 pb-4 border-b border-neutral-200">
-          {(side === "right" || side === "left") && (
-            <SheetPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
-              <X className="h-4 w-4" />
-              <span className="sr-only">Close</span>
-            </SheetPrimitive.Close>
-          )}
-        </div>
-        <div className="flex-1 overflow-auto py-4">
-          {children}
-        </div>
-      </div>
+      {children}
     </SheetPrimitive.Content>
   </SheetPortal>
 ))
@@ -111,7 +96,7 @@ const SheetFooter = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 border-t border-neutral-200 pt-4 mt-auto sticky bottom-0 bg-[hsl(210,40%,98%)]",
+      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
       className
     )}
     {...props}

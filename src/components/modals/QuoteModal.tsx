@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ArrowLeft } from "lucide-react";
@@ -43,38 +44,38 @@ export function QuoteModal({ open, onOpenChange }: QuoteModalProps) {
         side={isMobile ? "bottom" : "right"} 
         size="wide"
         className={cn(
-          isMobile ? "h-[90vh] rounded-t-xl pb-0 pt-4" : "p-0",
-          "bg-[#F3F0FF] border-l border-[#7E22CE]/30"
+          isMobile ? "h-[90vh] rounded-t-xl pb-0 pt-4" : "w-full max-w-[1200px] p-0",
+          "bg-[#F3F0FF] border-l border-[#7E22CE]/30 overflow-hidden flex flex-col"
         )}
       >
-        <div className="flex flex-col h-full">
-          <div className="flex-shrink-0 p-4 md:p-6 border-b border-neutral-200">
-            <SheetHeader className="text-left pb-2">
+        <div className="flex-shrink-0 p-4 md:p-6 border-b border-neutral-200">
+          <SheetHeader className="text-left pb-2">
+            {isMobile && (
+              <div className="mx-auto mb-4 h-1 w-[32px] rounded-full bg-[#7E22CE]/30" />
+            )}
+            <div className="flex items-center mb-1">
               {isMobile && (
-                <div className="mx-auto mb-4 h-1 w-[32px] rounded-full bg-[#7E22CE]/30" />
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="h-8 w-8 mr-2 -ml-2" 
+                  onClick={() => onOpenChange(false)}
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                  <span className="sr-only">Back</span>
+                </Button>
               )}
-              <div className="flex items-center mb-1">
-                {isMobile && (
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
-                    className="h-8 w-8 mr-2 -ml-2" 
-                    onClick={() => onOpenChange(false)}
-                  >
-                    <ArrowLeft className="h-4 w-4" />
-                    <span className="sr-only">Back</span>
-                  </Button>
-                )}
-                <SheetTitle className="text-[#7E22CE]">New Quote</SheetTitle>
-              </div>
-              <SheetDescription>Create a detailed quote for your client</SheetDescription>
-            </SheetHeader>
-            <div className="mt-2">
-              <Button variant="outline" size="sm" className="text-sm">Convert from Enquiry</Button>
+              <SheetTitle className="text-[#7E22CE]">New Quote</SheetTitle>
             </div>
+            <SheetDescription>Create a detailed quote for your client</SheetDescription>
+          </SheetHeader>
+          <div className="mt-2">
+            <Button variant="outline" size="sm" className="text-sm">Convert from Enquiry</Button>
           </div>
+        </div>
 
-          <div className="flex-1 overflow-y-auto py-4 px-4 md:py-6 md:px-6">
+        <ScrollArea className="flex-1 px-4 py-3 md:px-6 md:py-4">
+          <div className="pr-2">
             <ClientSection />
 
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
@@ -92,37 +93,37 @@ export function QuoteModal({ open, onOpenChange }: QuoteModalProps) {
               </TabsContent>
             </Tabs>
           </div>
+        </ScrollArea>
 
-          <SheetFooter className="border-t border-neutral-200 p-4 md:p-6 flex flex-col md:flex-row-reverse md:justify-between gap-4 bg-[#F3F0FF]">
-            {isMobile ? (
-              <>
-                <Button className="bg-[#7E22CE] hover:bg-[#7E22CE]/90 w-full text-white font-medium" onClick={handleSend}>
-                  Save & Send Quote
-                </Button>
-                <Button variant="outline" className="border-[#7E22CE] text-[#7E22CE] w-full" onClick={handleSave}>
+        <SheetFooter className="border-t border-neutral-200 p-4 md:p-6 flex flex-col md:flex-row-reverse md:justify-between gap-4 bg-[#F3F0FF] flex-shrink-0">
+          {isMobile ? (
+            <>
+              <Button className="bg-[#7E22CE] hover:bg-[#7E22CE]/90 w-full text-white font-medium" onClick={handleSend}>
+                Save & Send Quote
+              </Button>
+              <Button variant="outline" className="border-[#7E22CE] text-[#7E22CE] w-full" onClick={handleSave}>
+                Save
+              </Button>
+              <Button variant="outline" onClick={() => onOpenChange(false)} className="w-full">
+                Cancel
+              </Button>
+            </>
+          ) : (
+            <>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" className="border-[#7E22CE] text-[#7E22CE]" onClick={handleSave}>
                   Save
                 </Button>
-                <Button variant="outline" onClick={() => onOpenChange(false)} className="w-full">
-                  Cancel
+                <Button className="bg-[#7E22CE] hover:bg-[#7E22CE]/90" onClick={handleSend}>
+                  Save & Send Quote
                 </Button>
-              </>
-            ) : (
-              <>
-                <div className="flex items-center gap-2">
-                  <Button variant="outline" className="border-[#7E22CE] text-[#7E22CE]" onClick={handleSave}>
-                    Save
-                  </Button>
-                  <Button className="bg-[#7E22CE] hover:bg-[#7E22CE]/90" onClick={handleSend}>
-                    Save & Send Quote
-                  </Button>
-                </div>
-                <Button variant="outline" onClick={() => onOpenChange(false)}>
-                  Cancel
-                </Button>
-              </>
-            )}
-          </SheetFooter>
-        </div>
+              </div>
+              <Button variant="outline" onClick={() => onOpenChange(false)}>
+                Cancel
+              </Button>
+            </>
+          )}
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   );
