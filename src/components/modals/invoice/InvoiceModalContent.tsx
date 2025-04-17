@@ -20,11 +20,10 @@ export function InvoiceModalContent({ isMobile }: InvoiceModalContentProps) {
           </TabsList>
         </div>
         
-        <div className="w-full flex-1 overflow-hidden">
+        <div className="flex-1 relative overflow-hidden">
           <TabsContent 
             value="details" 
-            className="h-full w-full absolute inset-0 pt-16 px-4 pb-4 md:px-6 md:pb-6 mt-0 overflow-auto"
-            style={{ display: 'block' }}
+            className="h-full w-full px-4 pb-4 md:px-6 md:pb-6 mt-0 overflow-auto"
           >
             <ScrollArea className="h-full w-full">
               <div className="space-y-6 pb-6">
@@ -35,8 +34,7 @@ export function InvoiceModalContent({ isMobile }: InvoiceModalContentProps) {
           
           <TabsContent 
             value="preview" 
-            className="h-full w-full absolute inset-0 pt-16 px-4 pb-4 md:px-6 md:pb-6 mt-0 overflow-auto"
-            style={{ display: 'block' }}
+            className="h-full w-full px-4 pb-4 md:px-6 md:pb-6 mt-0 overflow-auto"
           >
             <ScrollArea className="h-full w-full">
               <div className="pb-6">

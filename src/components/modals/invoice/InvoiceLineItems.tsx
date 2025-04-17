@@ -5,7 +5,7 @@ import { PlusCircle } from "lucide-react";
 
 export function InvoiceLineItems() {
   return (
-    <div className="border rounded-md border-neutral-200 bg-white overflow-hidden">
+    <div className="border rounded-md border-neutral-200 bg-white">
       <div className="p-3 border-b border-neutral-200 bg-neutral-50 flex justify-between items-center">
         <h3 className="font-medium">Line Items</h3>
         <Button variant="outline" size="sm" className="text-xs h-8 px-3">
