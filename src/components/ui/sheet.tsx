@@ -45,7 +45,7 @@ const sheetVariants = cva(
         sm: "w-3/4 sm:max-w-[450px]",
         md: "w-3/4 sm:max-w-[650px]",
         lg: "w-3/4 sm:max-w-[800px]",
-        wide: "w-5/6 sm:max-w-[1200px]", // Updated wide size to be more spacious
+        wide: "w-full sm:max-w-[1200px]", // Updated to full width for mobile
       },
     },
     defaultVariants: {

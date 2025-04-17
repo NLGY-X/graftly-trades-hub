@@ -44,14 +44,14 @@ export function QuoteModal({ open, onOpenChange }: QuoteModalProps) {
         side={isMobile ? "bottom" : "right"} 
         size="wide"
         className={cn(
-          isMobile ? "h-[90vh] rounded-t-xl pb-0 pt-4" : "w-full max-w-[1200px] p-0",
+          isMobile ? "h-[95vh] rounded-t-xl p-0 inset-x-0 w-full" : "w-full max-w-[1200px] p-0",
           "bg-[#F3F0FF] border-l border-[#7E22CE]/30 overflow-hidden flex flex-col"
         )}
       >
-        <div className="flex-shrink-0 p-4 md:p-6 border-b border-neutral-200">
+        <div className="flex-shrink-0 px-4 py-3 md:p-6 border-b border-neutral-200">
           <SheetHeader className="text-left pb-2">
             {isMobile && (
-              <div className="mx-auto mb-4 h-1 w-[32px] rounded-full bg-[#7E22CE]/30" />
+              <div className="mx-auto mb-3 h-1 w-[32px] rounded-full bg-[#7E22CE]/30" />
             )}
             <div className="flex items-center mb-1">
               {isMobile && (
@@ -74,8 +74,8 @@ export function QuoteModal({ open, onOpenChange }: QuoteModalProps) {
           </div>
         </div>
 
-        <ScrollArea className="flex-1 px-4 py-3 md:px-6 md:py-4">
-          <div className="pr-2">
+        <ScrollArea className="flex-1 px-4 md:px-6 py-2">
+          <div className="pr-2 space-y-6">
             <ClientSection />
 
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
@@ -84,11 +84,11 @@ export function QuoteModal({ open, onOpenChange }: QuoteModalProps) {
                 <TabsTrigger value="terms" className="rounded-md">Terms & Conditions</TabsTrigger>
               </TabsList>
               
-              <TabsContent value="details" className="space-y-6 focus:outline-none">
+              <TabsContent value="details" className="focus:outline-none">
                 <QuoteDetailsTab />
               </TabsContent>
               
-              <TabsContent value="terms" className="space-y-4 focus:outline-none">
+              <TabsContent value="terms" className="focus:outline-none">
                 <TermsConditionsTab />
               </TabsContent>
             </Tabs>
