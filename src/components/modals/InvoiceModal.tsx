@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -67,12 +66,20 @@ export function InvoiceModal({ open, onOpenChange }: InvoiceModalProps) {
                   <span className="sr-only">Back</span>
                 </Button>
               )}
-              <SheetTitle className="text-[#F97316]">New Invoice</SheetTitle>
+              <SheetTitle className="text-[#8E9196] dark:text-[#D6BCFA]">New Invoice</SheetTitle>
             </div>
-            <SheetDescription>Create a professional invoice for your client</SheetDescription>
+            <SheetDescription className="text-[#8A898C] dark:text-[#9F9EA1]">
+              Create a professional invoice for your client
+            </SheetDescription>
           </SheetHeader>
           <div className="mt-2">
-            <Button variant="outline" size="sm" className="text-sm">Generate from Job</Button>
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="text-sm text-[#8E9196] hover:bg-[#F1F0FB] dark:text-[#C8C8C9]"
+            >
+              Generate from Job
+            </Button>
           </div>
         </div>
 
@@ -90,14 +97,14 @@ export function InvoiceModal({ open, onOpenChange }: InvoiceModalProps) {
                 <Card className="border-[#F97316]/10">
                   <CardContent className="p-4">
                     <div className="flex items-start gap-4">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F97316]/10 text-[#F97316]">
-                        <UserSquare2 className="h-5 w-5" />
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F97316]/10 text-[#8E9196] dark:text-[#9F9EA1]">
+                        <UserSquare2 className="h-5 w-4" />
                       </div>
                       <div className="flex-1">
                         <div className="flex justify-between">
                           <div>
-                            <h3 className="font-medium">Client Information</h3>
-                            <p className="text-sm text-muted-foreground">Select existing client or add new</p>
+                            <h3 className="font-medium text-[#403E43] dark:text-[#F1F0FB]">Client Information</h3>
+                            <p className="text-sm text-[#8A898C] dark:text-[#9F9EA1]">Select existing client or add new</p>
                           </div>
                         </div>
                         <div className="mt-4">
@@ -127,8 +134,12 @@ export function InvoiceModal({ open, onOpenChange }: InvoiceModalProps) {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="invoice-number">Invoice Number</Label>
-                    <Input id="invoice-number" defaultValue="INV-2025-0042" className="bg-white border-neutral-200" />
+                    <Label htmlFor="invoice-number" className="text-[#403E43] dark:text-[#F1F0FB]">Invoice Number</Label>
+                    <Input 
+                      id="invoice-number" 
+                      defaultValue="INV-2025-0042" 
+                      className="bg-white border-neutral-200 text-[#403E43] dark:text-[#F1F0FB] placeholder:text-[#8A898C] dark:placeholder:text-[#9F9EA1]" 
+                    />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="po-number">Reference/PO Number</Label>
@@ -409,13 +420,24 @@ export function InvoiceModal({ open, onOpenChange }: InvoiceModalProps) {
         <SheetFooter className="border-t border-neutral-200 p-4 md:p-6 flex flex-col md:flex-row md:justify-between gap-4 bg-[#FEF2F2] flex-shrink-0">
           {isMobile ? (
             <>
-              <Button className="bg-[#F97316] hover:bg-[#F97316]/90 w-full text-white font-medium" onClick={handleSend}>
+              <Button 
+                className="bg-[#F97316] hover:bg-[#F97316]/90 w-full text-white font-medium" 
+                onClick={handleSend}
+              >
                 <Mail className="h-4 w-4 mr-2" /> Send Invoice
               </Button>
-              <Button variant="outline" className="border-[#F97316] text-[#F97316] w-full" onClick={handleSave}>
+              <Button 
+                variant="outline" 
+                className="border-[#F97316] text-[#8E9196] dark:text-[#9F9EA1] w-full" 
+                onClick={handleSave}
+              >
                 Save Draft
               </Button>
-              <Button variant="outline" onClick={() => onOpenChange(false)} className="w-full">
+              <Button 
+                variant="outline" 
+                onClick={() => onOpenChange(false)} 
+                className="w-full text-[#8E9196] dark:text-[#9F9EA1]"
+              >
                 Cancel
               </Button>
             </>
@@ -437,7 +459,7 @@ export function InvoiceModal({ open, onOpenChange }: InvoiceModalProps) {
                 <Button variant="outline" onClick={() => onOpenChange(false)}>
                   Cancel
                 </Button>
-                <Button variant="outline" className="border-[#F97316] text-[#F97316]" onClick={handleSave}>
+                <Button variant="outline" className="border-[#F97316] text-[#8E9196] dark:text-[#9F9EA1]" onClick={handleSave}>
                   Save Draft
                 </Button>
                 <Button className="bg-[#F97316] hover:bg-[#F97316]/90" onClick={handleSend}>
