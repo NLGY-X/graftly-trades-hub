@@ -14,10 +14,10 @@ export const PaymentActions = ({ onCancel, onSubmit, isMobile }: PaymentActionsP
   if (isMobile) {
     return (
       <DrawerFooter className="pt-2">
-        <Button className="bg-[#059669] hover:bg-[#059669]/90" onClick={onSubmit}>
+        <Button className="bg-[#059669] hover:bg-[#059669]/90 w-full" onClick={onSubmit}>
           Record Payment
         </Button>
-        <Button variant="outline" onClick={onCancel}>
+        <Button variant="outline" onClick={onCancel} className="w-full">
           Cancel
         </Button>
       </DrawerFooter>

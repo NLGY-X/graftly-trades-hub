@@ -82,7 +82,7 @@ export function EnquiryModal({ open, onOpenChange, enquiryId, isEditing = false 
               />
             </div>
             <DrawerFooter className="border-t border-neutral-200 pt-4 px-4 pb-6 sticky bottom-0 bg-[#F3F0FF]">
-              <Button type="submit" className="bg-[#7E22CE] hover:bg-[#7E22CE]/90 w-full">
+              <Button type="submit" className="bg-[#7E22CE] hover:bg-[#7E22CE]/90 w-full text-white font-medium">
                 {isEditing ? "Update Enquiry" : "Submit Enquiry"}
               </Button>
               <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="w-full">

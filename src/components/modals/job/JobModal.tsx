@@ -85,47 +85,49 @@ export function JobModal({ open, onOpenChange }: JobModalProps) {
 
           <div className="flex-1 overflow-y-auto p-4 md:py-6 md:px-6">
             {/* Status Timeline */}
-            <JobStatusTimeline 
-              statusOptions={statusOptions} 
-              status={status} 
-              updateStatus={updateStatus} 
-            />
+            <div className="mb-6 overflow-x-auto pb-2">
+              <JobStatusTimeline 
+                statusOptions={statusOptions} 
+                status={status} 
+                updateStatus={updateStatus} 
+              />
+            </div>
 
             <Tabs defaultValue="details" value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className={cn(
-                "grid w-full", 
-                isMobile ? "grid-cols-2" : "grid-cols-4"
+                "grid w-full rounded-md",
+                isMobile ? "grid-cols-2 sticky top-0 z-10 bg-[#ECFDF5]" : "grid-cols-4"
               )}>
-                <TabsTrigger value="details">Details</TabsTrigger>
-                <TabsTrigger value="schedule">Schedule</TabsTrigger>
+                <TabsTrigger value="details" className="rounded-md">Details</TabsTrigger>
+                <TabsTrigger value="schedule" className="rounded-md">Schedule</TabsTrigger>
                 {!isMobile && (
                   <>
-                    <TabsTrigger value="materials">Materials</TabsTrigger>
-                    <TabsTrigger value="notes">Notes</TabsTrigger>
+                    <TabsTrigger value="materials" className="rounded-md">Materials</TabsTrigger>
+                    <TabsTrigger value="notes" className="rounded-md">Notes</TabsTrigger>
                   </>
                 )}
               </TabsList>
               
               {isMobile && (
-                <TabsList className="grid w-full grid-cols-2 mt-2">
-                  <TabsTrigger value="materials">Materials</TabsTrigger>
-                  <TabsTrigger value="notes">Notes</TabsTrigger>
+                <TabsList className="grid w-full grid-cols-2 mt-2 rounded-md">
+                  <TabsTrigger value="materials" className="rounded-md">Materials</TabsTrigger>
+                  <TabsTrigger value="notes" className="rounded-md">Notes</TabsTrigger>
                 </TabsList>
               )}
               
-              <TabsContent value="details" className="mt-6 space-y-6">
+              <TabsContent value="details" className="mt-6 space-y-6 focus:outline-none">
                 <JobDetailsTab />
               </TabsContent>
               
-              <TabsContent value="schedule" className="mt-6 space-y-6">
+              <TabsContent value="schedule" className="mt-6 space-y-6 focus:outline-none">
                 <JobScheduleTab date={date} setDate={setDate} />
               </TabsContent>
               
-              <TabsContent value="materials" className="mt-6 space-y-6">
+              <TabsContent value="materials" className="mt-6 space-y-6 focus:outline-none">
                 <JobMaterialsTab />
               </TabsContent>
               
-              <TabsContent value="notes" className="mt-6 space-y-6">
+              <TabsContent value="notes" className="mt-6 space-y-6 focus:outline-none">
                 <JobNotesTab />
               </TabsContent>
             </Tabs>
@@ -134,7 +136,7 @@ export function JobModal({ open, onOpenChange }: JobModalProps) {
           <SheetFooter className="border-t border-neutral-200 p-4 md:p-6 flex flex-col md:flex-row md:justify-between gap-4 bg-[#ECFDF5]">
             {isMobile ? (
               <>
-                <Button className="bg-[#059669] hover:bg-[#059669]/90 w-full">
+                <Button className="bg-[#059669] hover:bg-[#059669]/90 w-full text-white font-medium">
                   Save Changes
                 </Button>
                 <Button variant="outline" className="gap-1 w-full">

@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from "@/components/ui/sheet";
@@ -76,16 +77,16 @@ export function QuoteModal({ open, onOpenChange }: QuoteModalProps) {
             <ClientSection />
 
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-6">
-                <TabsTrigger value="details">Quote Details</TabsTrigger>
-                <TabsTrigger value="terms">Terms & Conditions</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-2 mb-6 rounded-md">
+                <TabsTrigger value="details" className="rounded-md">Quote Details</TabsTrigger>
+                <TabsTrigger value="terms" className="rounded-md">Terms & Conditions</TabsTrigger>
               </TabsList>
               
-              <TabsContent value="details" className="space-y-6">
+              <TabsContent value="details" className="space-y-6 focus:outline-none">
                 <QuoteDetailsTab />
               </TabsContent>
               
-              <TabsContent value="terms" className="space-y-4">
+              <TabsContent value="terms" className="space-y-4 focus:outline-none">
                 <TermsConditionsTab />
               </TabsContent>
             </Tabs>
@@ -94,7 +95,7 @@ export function QuoteModal({ open, onOpenChange }: QuoteModalProps) {
           <SheetFooter className="border-t border-neutral-200 p-4 md:p-6 flex flex-col md:flex-row-reverse md:justify-between gap-4 bg-[#EEF2FF]">
             {isMobile ? (
               <>
-                <Button className="bg-[#1E40AF] hover:bg-[#1E40AF]/90 w-full" onClick={handleSend}>
+                <Button className="bg-[#1E40AF] hover:bg-[#1E40AF]/90 w-full text-white font-medium" onClick={handleSend}>
                   Save & Send Quote
                 </Button>
                 <Button variant="outline" className="border-[#1E40AF] text-[#1E40AF] w-full" onClick={handleSave}>

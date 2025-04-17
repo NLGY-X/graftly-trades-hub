@@ -55,7 +55,12 @@ const AlertDialogContent = React.forwardRef<
           className
         )}
         {...props}
-      />
+      >
+        {isMobile && (
+          <div className="mx-auto mb-4 h-1 w-[32px] rounded-full bg-neutral-300" />
+        )}
+        {props.children}
+      </AlertDialogPrimitive.Content>
     </AlertDialogPortal>
   )
 })
@@ -84,7 +89,7 @@ const AlertDialogFooter = ({
     <div
       className={cn(
         isMobile 
-          ? "flex flex-col gap-2"
+          ? "flex flex-col-reverse gap-2" // Changed from flex-col to flex-col-reverse
           : "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
         className
       )}

@@ -103,39 +103,39 @@ export function NewJobModal({ open, onOpenChange }: NewJobModalProps) {
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <Tabs defaultValue="details" value={activeTab} onValueChange={setActiveTab} className="w-full">
                   <TabsList className={cn(
-                    "grid w-full", 
-                    isMobile ? "grid-cols-2" : "grid-cols-4"
+                    "grid w-full rounded-md", 
+                    isMobile ? "grid-cols-2 sticky top-0 z-10 bg-[#ECFDF5]" : "grid-cols-4"
                   )}>
-                    <TabsTrigger value="details">Details</TabsTrigger>
-                    <TabsTrigger value="schedule">Schedule</TabsTrigger>
+                    <TabsTrigger value="details" className="rounded-md">Details</TabsTrigger>
+                    <TabsTrigger value="schedule" className="rounded-md">Schedule</TabsTrigger>
                     {!isMobile && (
                       <>
-                        <TabsTrigger value="materials">Materials</TabsTrigger>
-                        <TabsTrigger value="notes">Notes</TabsTrigger>
+                        <TabsTrigger value="materials" className="rounded-md">Materials</TabsTrigger>
+                        <TabsTrigger value="notes" className="rounded-md">Notes</TabsTrigger>
                       </>
                     )}
                   </TabsList>
                   
                   {isMobile && (
-                    <TabsList className="grid w-full grid-cols-2 mt-2">
-                      <TabsTrigger value="materials">Materials</TabsTrigger>
-                      <TabsTrigger value="notes">Notes</TabsTrigger>
+                    <TabsList className="grid w-full grid-cols-2 mt-2 rounded-md">
+                      <TabsTrigger value="materials" className="rounded-md">Materials</TabsTrigger>
+                      <TabsTrigger value="notes" className="rounded-md">Notes</TabsTrigger>
                     </TabsList>
                   )}
                   
-                  <TabsContent value="details" className="mt-6">
+                  <TabsContent value="details" className="mt-6 focus:outline-none">
                     <JobDetailsFormTab control={form.control} />
                   </TabsContent>
                   
-                  <TabsContent value="schedule" className="mt-6">
+                  <TabsContent value="schedule" className="mt-6 focus:outline-none">
                     <JobScheduleFormTab control={form.control} />
                   </TabsContent>
                   
-                  <TabsContent value="materials" className="mt-6">
+                  <TabsContent value="materials" className="mt-6 focus:outline-none">
                     <JobMaterialsTab />
                   </TabsContent>
                   
-                  <TabsContent value="notes" className="mt-6">
+                  <TabsContent value="notes" className="mt-6 focus:outline-none">
                     <JobNotesTab />
                   </TabsContent>
                 </Tabs>
@@ -147,12 +147,12 @@ export function NewJobModal({ open, onOpenChange }: NewJobModalProps) {
             {isMobile ? (
               <>
                 <Button 
-                  className="bg-[#059669] hover:bg-[#059669]/90 w-full"
+                  className="bg-[#059669] hover:bg-[#059669]/90 w-full text-white font-medium"
                   onClick={form.handleSubmit(onSubmit)}
                 >
                   Create Job
                 </Button>
-                <Button variant="ghost" onClick={() => onOpenChange(false)} className="w-full">
+                <Button variant="outline" onClick={() => onOpenChange(false)} className="w-full">
                   Cancel
                 </Button>
               </>

@@ -90,7 +90,7 @@ const DialogFooter = ({
     <div
       className={cn(
         isMobile 
-          ? "flex flex-col gap-2"
+          ? "flex flex-col-reverse gap-2" // Changed from flex-col to flex-col-reverse
           : "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
         "pt-4",
         className
