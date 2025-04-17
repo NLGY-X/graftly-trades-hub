@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { format, addDays, isToday, startOfDay } from "date-fns";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface Job {
   id: string;
@@ -24,8 +25,9 @@ interface JobListProps {
 }
 
 export function JobList({ jobs, view, onJobClick }: JobListProps) {
+  const isMobile = useIsMobile();
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [visibleDays, setVisibleDays] = useState(5);
+  const visibleDays = isMobile ? 3 : 5;
 
   // Function to navigate to previous days
   const goToPreviousDays = () => {
@@ -104,7 +106,12 @@ export function JobList({ jobs, view, onJobClick }: JobListProps) {
         </div>
       </CardHeader>
       <CardContent className="p-3">
-        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-2">
+        <div className={cn(
+          "grid gap-2",
+          isMobile 
+            ? "grid-cols-1 sm:grid-cols-3" 
+            : "grid-cols-1 sm:grid-cols-3 md:grid-cols-5"
+        )}>
           {calendarDays.map((date, index) => {
             const dateJobs = groupJobsByDate(jobs, date);
             return (
