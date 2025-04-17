@@ -44,14 +44,14 @@ export function QuoteModal({ open, onOpenChange }: QuoteModalProps) {
         size="lg"
         className={cn(
           isMobile ? "h-[90vh] rounded-t-xl pb-0 pt-4" : "p-0",
-          "bg-[#EEF2FF] border-l border-[#1E40AF]/30"
+          "bg-[#F3F0FF] border-l border-[#7E22CE]/30"
         )}
       >
         <div className="flex flex-col h-full">
           <div className="flex-shrink-0 p-4 md:p-6 border-b border-neutral-200">
             <SheetHeader className="text-left pb-2">
               {isMobile && (
-                <div className="mx-auto mb-4 h-1 w-[32px] rounded-full bg-[#1E40AF]/30" />
+                <div className="mx-auto mb-4 h-1 w-[32px] rounded-full bg-[#7E22CE]/30" />
               )}
               <div className="flex items-center mb-1">
                 {isMobile && (
@@ -65,7 +65,7 @@ export function QuoteModal({ open, onOpenChange }: QuoteModalProps) {
                     <span className="sr-only">Back</span>
                   </Button>
                 )}
-                <SheetTitle className="text-[#1E40AF]">New Quote</SheetTitle>
+                <SheetTitle className="text-[#7E22CE]">New Quote</SheetTitle>
               </div>
               <SheetDescription>Create a detailed quote for your client</SheetDescription>
             </SheetHeader>
@@ -93,26 +93,26 @@ export function QuoteModal({ open, onOpenChange }: QuoteModalProps) {
             </Tabs>
           </div>
 
-          <SheetFooter className="border-t border-neutral-200 p-4 md:p-6 flex flex-col md:flex-row-reverse md:justify-between gap-4 bg-[#EEF2FF]">
+          <SheetFooter className="border-t border-neutral-200 p-4 md:p-6 flex flex-col md:flex-row-reverse md:justify-between gap-4 bg-[#F3F0FF]">
             {isMobile ? (
               <>
-                <Button className="bg-[#1E40AF] hover:bg-[#1E40AF]/90 w-full text-white font-medium" onClick={handleSend}>
+                <Button className="bg-[#7E22CE] hover:bg-[#7E22CE]/90 w-full text-white font-medium" onClick={handleSend}>
                   Save & Send Quote
                 </Button>
-                <Button variant="outline" className="border-[#1E40AF] text-[#1E40AF] w-full" onClick={handleSave}>
+                <Button variant="outline" className="border-[#7E22CE] text-[#7E22CE] w-full" onClick={handleSave}>
                   Save
                 </Button>
-                <Button variant="ghost" onClick={() => onOpenChange(false)} className="w-full">
+                <Button variant="outline" onClick={() => onOpenChange(false)} className="w-full">
                   Cancel
                 </Button>
               </>
             ) : (
               <>
                 <div className="flex items-center gap-2">
-                  <Button variant="outline" className="border-[#1E40AF] text-[#1E40AF]" onClick={handleSave}>
+                  <Button variant="outline" className="border-[#7E22CE] text-[#7E22CE]" onClick={handleSave}>
                     Save
                   </Button>
-                  <Button className="bg-[#1E40AF] hover:bg-[#1E40AF]/90" onClick={handleSend}>
+                  <Button className="bg-[#7E22CE] hover:bg-[#7E22CE]/90" onClick={handleSend}>
                     Save & Send Quote
                   </Button>
                 </div>
