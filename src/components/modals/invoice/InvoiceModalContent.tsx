@@ -21,11 +21,11 @@ export function InvoiceModalContent({ isMobile }: InvoiceModalContentProps) {
         </div>
         
         <div className="px-4 py-2 md:px-6 md:py-4">
-          <TabsContent value="details" className="space-y-6 pr-2">
+          <TabsContent value="details" className="space-y-6 pr-2 mt-0">
             <InvoiceDetailsTab />
           </TabsContent>
           
-          <TabsContent value="preview" className="pt-4 pr-2">
+          <TabsContent value="preview" className="pt-4 pr-2 mt-0">
             <InvoicePreviewTab />
           </TabsContent>
         </div>
