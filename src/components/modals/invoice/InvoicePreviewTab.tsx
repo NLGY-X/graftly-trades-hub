@@ -3,7 +3,7 @@ import React from "react";
 
 export function InvoicePreviewTab() {
   return (
-    <div className="bg-white border border-neutral-200 rounded-md p-6 max-w-[640px] mx-auto">
+    <div className="bg-white border border-neutral-200 rounded-md p-5 max-w-[640px] mx-auto overflow-hidden">
       <div className="flex justify-between items-start">
         <div>
           <h2 className="text-2xl font-bold text-[#F97316]">INVOICE</h2>
@@ -17,7 +17,7 @@ export function InvoicePreviewTab() {
         </div>
       </div>
       
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <div className="text-sm font-semibold text-neutral-500">BILL TO</div>
           <div className="mt-1">
@@ -39,8 +39,8 @@ export function InvoicePreviewTab() {
         </div>
       </div>
       
-      <div className="mt-8">
-        <div className="grid grid-cols-12 gap-4 py-2 border-b border-neutral-200 font-semibold text-sm text-neutral-500">
+      <div className="mt-6">
+        <div className="grid grid-cols-12 gap-2 py-2 border-b border-neutral-200 font-semibold text-sm text-neutral-500">
           <div className="col-span-6">DESCRIPTION</div>
           <div className="col-span-1 text-right">QTY</div>
           <div className="col-span-2 text-right">PRICE</div>
@@ -49,7 +49,7 @@ export function InvoicePreviewTab() {
         </div>
         
         <div className="divide-y divide-neutral-100">
-          <div className="grid grid-cols-12 gap-4 py-3">
+          <div className="grid grid-cols-12 gap-2 py-3">
             <div className="col-span-6">Kitchen Cabinet Installation</div>
             <div className="col-span-1 text-right">1</div>
             <div className="col-span-2 text-right">£2,500.00</div>
@@ -57,7 +57,7 @@ export function InvoicePreviewTab() {
             <div className="col-span-2 text-right font-medium">£2,500.00</div>
           </div>
           
-          <div className="grid grid-cols-12 gap-4 py-3">
+          <div className="grid grid-cols-12 gap-2 py-3">
             <div className="col-span-6">Plumbing Work</div>
             <div className="col-span-1 text-right">1</div>
             <div className="col-span-2 text-right">£350.00</div>
@@ -65,7 +65,7 @@ export function InvoicePreviewTab() {
             <div className="col-span-2 text-right font-medium">£350.00</div>
           </div>
           
-          <div className="grid grid-cols-12 gap-4 py-3">
+          <div className="grid grid-cols-12 gap-2 py-3">
             <div className="col-span-6">Electrical Work</div>
             <div className="col-span-1 text-right">1</div>
             <div className="col-span-2 text-right">£450.00</div>
@@ -75,17 +75,17 @@ export function InvoicePreviewTab() {
         </div>
         
         <div className="mt-4 py-4 border-t border-neutral-200">
-          <div className="grid grid-cols-12 gap-4">
+          <div className="grid grid-cols-12 gap-2">
             <div className="col-span-8"></div>
             <div className="col-span-2 text-right text-sm font-semibold text-neutral-500">SUBTOTAL</div>
             <div className="col-span-2 text-right">£3,300.00</div>
           </div>
-          <div className="grid grid-cols-12 gap-4 mt-1">
+          <div className="grid grid-cols-12 gap-2 mt-1">
             <div className="col-span-8"></div>
             <div className="col-span-2 text-right text-sm font-semibold text-neutral-500">VAT (20%)</div>
             <div className="col-span-2 text-right">£660.00</div>
           </div>
-          <div className="grid grid-cols-12 gap-4 mt-3 pt-3 border-t border-neutral-200">
+          <div className="grid grid-cols-12 gap-2 mt-3 pt-3 border-t border-neutral-200">
             <div className="col-span-8"></div>
             <div className="col-span-2 text-right text-sm font-bold text-neutral-700">TOTAL</div>
             <div className="col-span-2 text-right font-bold text-lg">£3,960.00</div>
@@ -93,8 +93,8 @@ export function InvoicePreviewTab() {
         </div>
       </div>
       
-      <div className="mt-8 pt-6 border-t border-neutral-200">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="mt-6 pt-4 border-t border-neutral-200">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <div className="text-sm font-semibold text-neutral-500">PAYMENT TERMS</div>
             <div className="mt-1 text-sm">
@@ -111,7 +111,7 @@ export function InvoicePreviewTab() {
           </div>
         </div>
         
-        <div className="mt-6 text-center text-sm text-neutral-500">
+        <div className="mt-4 text-center text-sm text-neutral-500">
           Thank you for your business. Please contact us if you have any questions.
         </div>
       </div>
