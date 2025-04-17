@@ -38,7 +38,7 @@ export function InvoiceModal({ open, onOpenChange }: InvoiceModalProps) {
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" size="wide" className="w-[800px] max-w-full bg-[#FEF2F2] border-l border-[#F97316]/30 p-0">
+      <SheetContent side="right" size="lg" className="w-[800px] max-w-full bg-[#FEF2F2] border-l border-[#F97316]/30 p-0">
         <div className="flex flex-col h-full">
           <div className="flex-shrink-0 p-6 border-b border-neutral-200">
             <SheetHeader className="text-left pb-2">
