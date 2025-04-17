@@ -5,7 +5,7 @@ import { EnquiryModal } from "./EnquiryModal";
 import { QuoteModal } from "./QuoteModal";
 import { JobModal } from "./job/JobModal";
 import { NewJobModal } from "./job/NewJobModal";
-import { InvoiceModal } from "./InvoiceModal";
+import { InvoiceModal } from "./invoice/InvoiceModal"; // Updated path to the new location
 import { PaymentModal } from "./PaymentModal";
 
 export function ModalRoot() {
