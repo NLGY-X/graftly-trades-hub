@@ -77,7 +77,7 @@ export function PaymentModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-[#ECFDF5] border border-[#059669]/30 max-w-[500px]">
+      <DialogContent size="sm" className="bg-[#ECFDF5] border border-[#059669]/30">
         <DialogHeader>
           <DialogTitle className="text-[#059669]">Record Payment</DialogTitle>
           <DialogDescription className="text-sm">

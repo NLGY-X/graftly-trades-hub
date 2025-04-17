@@ -1,4 +1,3 @@
-
 import * as SheetPrimitive from "@radix-ui/react-dialog"
 import { cva, type VariantProps } from "class-variance-authority"
 import { X } from "lucide-react"
@@ -42,13 +41,14 @@ const sheetVariants = cva(
           "inset-y-0 right-0 h-full border-l border-neutral-200 data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right",
       },
       size: {
-        standard: "w-3/4 sm:max-w-[400px]",
-        wide: "w-3/4 sm:max-w-[480px]",
+        sm: "w-3/4 sm:max-w-[450px]",
+        md: "w-3/4 sm:max-w-[650px]",
+        lg: "w-3/4 sm:max-w-[800px]",
       },
     },
     defaultVariants: {
       side: "right",
-      size: "standard",
+      size: "md",
     },
   }
 )
@@ -60,7 +60,7 @@ interface SheetContentProps
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,
   SheetContentProps
->(({ side = "right", size = "standard", className, children, ...props }, ref) => (
+>(({ side = "right", size = "md", className, children, ...props }, ref) => (
   <SheetPortal>
     <SheetOverlay />
     <SheetPrimitive.Content
@@ -68,15 +68,12 @@ const SheetContent = React.forwardRef<
       className={cn(sheetVariants({ side, size }), className)}
       {...props}
     >
+      {side === "bottom" && (
+        <div className="mx-auto mt-4 h-1 w-[32px] rounded-full bg-neutral-300" />
+      )}
       <div className="flex flex-col h-full">
         <div className="flex-shrink-0 pb-4 border-b border-neutral-200">
-          {side === "right" && (
-            <SheetPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
-              <X className="h-4 w-4" />
-              <span className="sr-only">Close</span>
-            </SheetPrimitive.Close>
-          )}
-          {side === "left" && (
+          {(side === "right" || side === "left") && (
             <SheetPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
               <X className="h-4 w-4" />
               <span className="sr-only">Close</span>

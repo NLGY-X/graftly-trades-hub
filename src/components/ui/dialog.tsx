@@ -1,4 +1,3 @@
-
 import * as React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { X } from "lucide-react"
@@ -32,10 +31,16 @@ DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
-    size?: "sm" | "md"
+    size?: "sm" | "md" | "lg"
   }
 >(({ className, children, size = "md", ...props }, ref) => {
   const isMobile = useIsMobile();
+  
+  const sizeClasses = {
+    sm: "sm:max-w-[450px]",
+    md: "sm:max-w-[650px]",
+    lg: "sm:max-w-[800px]",
+  };
   
   return (
     <DialogPortal>
@@ -47,8 +52,8 @@ const DialogContent = React.forwardRef<
           isMobile 
             ? "bottom-0 left-0 right-0 rounded-t-lg data-[state=open]:slide-in-from-bottom-[2%] data-[state=closed]:slide-out-to-bottom-[2%] max-h-[90vh] overflow-y-auto"
             : "left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]",
-          size === "sm" ? "sm:max-w-[500px]" : "sm:max-w-[650px]",
-          "mx-0 sm:mx-auto",
+          size ? sizeClasses[size] : sizeClasses.md,
+          "mx-4 sm:mx-auto",
           className
         )}
         {...props}
@@ -90,7 +95,7 @@ const DialogFooter = ({
     <div
       className={cn(
         isMobile 
-          ? "flex flex-col-reverse gap-2" // Changed from flex-col to flex-col-reverse
+          ? "flex flex-col-reverse gap-2"
           : "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
         "pt-4",
         className

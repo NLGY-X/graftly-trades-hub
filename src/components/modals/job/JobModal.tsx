@@ -43,8 +43,9 @@ export function JobModal({ open, onOpenChange }: JobModalProps) {
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent 
         side={isMobile ? "bottom" : "right"} 
+        size="md"
         className={cn(
-          isMobile ? "h-[90vh] rounded-t-xl pb-0 pt-4" : "w-[650px] max-w-full p-0",
+          isMobile ? "h-[90vh] rounded-t-xl pb-0 pt-4" : "p-0",
           "bg-[#ECFDF5] border-l border-[#059669]/30"
         )}
       >

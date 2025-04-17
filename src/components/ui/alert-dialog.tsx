@@ -1,4 +1,3 @@
-
 import * as React from "react"
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog"
 
@@ -31,14 +30,21 @@ const AlertDialogContent = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content> & {
     variant?: "destructive" | "warning" | "success"
+    size?: "sm" | "md" | "lg"
   }
->(({ className, variant, ...props }, ref) => {
+>(({ className, variant, size = "sm", ...props }, ref) => {
   const isMobile = useIsMobile();
   const variantClasses = {
     destructive: "border-destructive/30",
     warning: "border-warning/30",
     success: "border-success/30 bg-success/5",
   }
+  
+  const sizeClasses = {
+    sm: "sm:max-w-[450px]",
+    md: "sm:max-w-[650px]",
+    lg: "sm:max-w-[800px]",
+  };
   
   return (
     <AlertDialogPortal>
@@ -49,8 +55,9 @@ const AlertDialogContent = React.forwardRef<
           "fixed z-50 grid w-full gap-4 border bg-[hsl(210,40%,98%)] p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 sm:rounded-lg",
           isMobile 
             ? "bottom-0 data-[state=open]:slide-in-from-bottom-[8%] rounded-t-lg max-w-[100%] left-0 right-0"
-            : "left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] max-w-[500px] data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]",
+            : "left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]",
           variant && variantClasses[variant],
+          size ? sizeClasses[size] : sizeClasses.sm,
           "mx-4 sm:mx-auto",
           className
         )}
@@ -89,7 +96,7 @@ const AlertDialogFooter = ({
     <div
       className={cn(
         isMobile 
-          ? "flex flex-col-reverse gap-2" // Changed from flex-col to flex-col-reverse
+          ? "flex flex-col-reverse gap-2"
           : "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
         className
       )}
