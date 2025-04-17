@@ -4,7 +4,7 @@ import React from "react";
 export function InvoicePreviewTab() {
   return (
     <div className="bg-white border border-neutral-200 rounded-md p-5 max-w-[640px] mx-auto overflow-hidden">
-      <div className="flex justify-between items-start">
+      <div className="flex justify-between items-start flex-wrap gap-4">
         <div>
           <h2 className="text-2xl font-bold text-[#F97316]">INVOICE</h2>
           <div className="mt-2 text-sm text-neutral-500">#INV-2025-0042</div>
@@ -50,7 +50,7 @@ export function InvoicePreviewTab() {
         
         <div className="divide-y divide-neutral-100">
           <div className="grid grid-cols-12 gap-2 py-3">
-            <div className="col-span-6">Kitchen Cabinet Installation</div>
+            <div className="col-span-6 break-words">Kitchen Cabinet Installation</div>
             <div className="col-span-1 text-right">1</div>
             <div className="col-span-2 text-right">£2,500.00</div>
             <div className="col-span-1 text-right">20%</div>
@@ -58,7 +58,7 @@ export function InvoicePreviewTab() {
           </div>
           
           <div className="grid grid-cols-12 gap-2 py-3">
-            <div className="col-span-6">Plumbing Work</div>
+            <div className="col-span-6 break-words">Plumbing Work</div>
             <div className="col-span-1 text-right">1</div>
             <div className="col-span-2 text-right">£350.00</div>
             <div className="col-span-1 text-right">20%</div>
@@ -66,7 +66,7 @@ export function InvoicePreviewTab() {
           </div>
           
           <div className="grid grid-cols-12 gap-2 py-3">
-            <div className="col-span-6">Electrical Work</div>
+            <div className="col-span-6 break-words">Electrical Work</div>
             <div className="col-span-1 text-right">1</div>
             <div className="col-span-2 text-right">£450.00</div>
             <div className="col-span-1 text-right">20%</div>

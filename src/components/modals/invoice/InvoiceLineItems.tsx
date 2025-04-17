@@ -15,15 +15,15 @@ export function InvoiceLineItems() {
       <div className="p-3">
         <div className="grid grid-cols-12 gap-1 mb-2 text-sm font-medium text-neutral-500">
           <div className="col-span-6">Description</div>
-          <div className="col-span-1">Qty</div>
-          <div className="col-span-2">Unit Price</div>
-          <div className="col-span-1">VAT %</div>
+          <div className="col-span-1 text-center">Qty</div>
+          <div className="col-span-2 text-center">Unit Price</div>
+          <div className="col-span-1 text-center">VAT %</div>
           <div className="col-span-2 text-right">Total</div>
         </div>
         
         <div className="space-y-2">
           <div className="grid grid-cols-12 gap-1 py-2 items-center bg-neutral-50 rounded-md border border-neutral-200">
-            <div className="col-span-6 px-2 truncate">
+            <div className="col-span-6 px-2 break-words">
               Kitchen Cabinet Installation
             </div>
             <div className="col-span-1 px-1 text-center">1</div>
@@ -35,7 +35,7 @@ export function InvoiceLineItems() {
           </div>
           
           <div className="grid grid-cols-12 gap-1 py-2 items-center bg-neutral-50 rounded-md border border-neutral-200">
-            <div className="col-span-6 px-2 truncate">
+            <div className="col-span-6 px-2 break-words">
               Plumbing Work
             </div>
             <div className="col-span-1 px-1 text-center">1</div>
@@ -47,7 +47,7 @@ export function InvoiceLineItems() {
           </div>
           
           <div className="grid grid-cols-12 gap-1 py-2 items-center bg-neutral-50 rounded-md border border-neutral-200">
-            <div className="col-span-6 px-2 truncate">
+            <div className="col-span-6 px-2 break-words">
               Electrical Work
             </div>
             <div className="col-span-1 px-1 text-center">1</div>
