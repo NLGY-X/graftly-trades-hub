@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -30,22 +29,22 @@ export function EnquiryCard({ enquiry, onConvertToQuote, onEditEnquiry }: Enquir
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'new':
-        return 'bg-[#2962FF] hover:bg-[#2962FF]/90';
+        return 'bg-[#2962FF] text-white hover:bg-[#2962FF]/90 text-xs font-medium px-2 py-0.5';
       case 'quote_pending':
-        return 'bg-amber-500 hover:bg-amber-600';
+        return 'bg-amber-500 text-white hover:bg-amber-600 text-xs font-medium px-2 py-0.5';
       case 'converted':
-        return 'bg-green-600 hover:bg-green-700';
+        return 'bg-green-600 text-white hover:bg-green-700 text-xs font-medium px-2 py-0.5';
       default:
-        return 'bg-gray-500 hover:bg-gray-600';
+        return 'bg-gray-500 text-white hover:bg-gray-600 text-xs font-medium px-2 py-0.5';
     }
   };
   
   const getStatusLabel = (status: string) => {
     switch (status) {
       case 'new':
-        return 'New Enquiry';
+        return 'New';
       case 'quote_pending':
-        return 'Quote Pending';
+        return 'Pending';
       case 'converted':
         return 'Converted';
       default:
