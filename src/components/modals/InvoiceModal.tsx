@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -7,10 +8,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { UserSquare2, CreditCard, PlusCircle, Printer, Mail, Download, Trash } from "lucide-react";
+import { UserSquare2, CreditCard, PlusCircle, Printer, Mail, Download, Trash, ArrowLeft } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface InvoiceModalProps {
   open: boolean;
@@ -19,6 +22,7 @@ interface InvoiceModalProps {
 
 export function InvoiceModal({ open, onOpenChange }: InvoiceModalProps) {
   const { toast } = useToast();
+  const isMobile = useIsMobile();
   
   const handleSave = () => {
     toast({
@@ -38,28 +42,51 @@ export function InvoiceModal({ open, onOpenChange }: InvoiceModalProps) {
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" size="lg" className="w-[800px] max-w-full bg-[#FEF2F2] border-l border-[#F97316]/30 p-0">
-        <div className="flex flex-col h-full">
-          <div className="flex-shrink-0 p-6 border-b border-neutral-200">
-            <SheetHeader className="text-left pb-2">
+      <SheetContent 
+        side={isMobile ? "bottom" : "right"} 
+        size="wide" 
+        className={cn(
+          isMobile ? "h-[95vh] rounded-t-xl p-0 inset-x-0 w-full" : "p-0",
+          "bg-[#FEF2F2] border-l border-[#F97316]/30 overflow-hidden flex flex-col"
+        )}
+      >
+        <div className="flex-shrink-0 px-4 py-3 md:p-6 border-b border-neutral-200">
+          <SheetHeader className="text-left pb-2">
+            {isMobile && (
+              <div className="mx-auto mb-3 h-1 w-[32px] rounded-full bg-[#F97316]/30" />
+            )}
+            <div className="flex items-center">
+              {isMobile && (
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="h-8 w-8 mr-2 -ml-2" 
+                  onClick={() => onOpenChange(false)}
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                  <span className="sr-only">Back</span>
+                </Button>
+              )}
               <SheetTitle className="text-[#F97316]">New Invoice</SheetTitle>
-              <SheetDescription>Create a professional invoice for your client</SheetDescription>
-            </SheetHeader>
-            <div className="mt-2">
-              <Button variant="outline" size="sm" className="text-sm">Generate from Job</Button>
             </div>
+            <SheetDescription>Create a professional invoice for your client</SheetDescription>
+          </SheetHeader>
+          <div className="mt-2">
+            <Button variant="outline" size="sm" className="text-sm">Generate from Job</Button>
           </div>
+        </div>
 
-          <div className="flex-1 overflow-auto">
-            <Tabs defaultValue="details" className="h-full">
-              <div className="px-6 py-4 border-b border-neutral-200">
-                <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="details">Invoice Details</TabsTrigger>
-                  <TabsTrigger value="preview">Preview</TabsTrigger>
-                </TabsList>
-              </div>
-              
-              <TabsContent value="details" className="p-6 space-y-6">
+        <ScrollArea className="flex-1">
+          <Tabs defaultValue="details" className="h-full">
+            <div className="px-4 py-3 md:px-6 md:py-4 border-b border-neutral-200 sticky top-0 z-10 bg-[#FEF2F2]">
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="details">Invoice Details</TabsTrigger>
+                <TabsTrigger value="preview">Preview</TabsTrigger>
+              </TabsList>
+            </div>
+            
+            <div className="px-4 py-2 md:px-6 md:py-4">
+              <TabsContent value="details" className="space-y-6 pr-2">
                 <Card className="border-[#F97316]/10">
                   <CardContent className="p-4">
                     <div className="flex items-start gap-4">
@@ -98,7 +125,7 @@ export function InvoiceModal({ open, onOpenChange }: InvoiceModalProps) {
                   </CardContent>
                 </Card>
                 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="invoice-number">Invoice Number</Label>
                     <Input id="invoice-number" defaultValue="INV-2025-0042" className="bg-white border-neutral-200" />
@@ -109,7 +136,7 @@ export function InvoiceModal({ open, onOpenChange }: InvoiceModalProps) {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="issue-date">Issue Date</Label>
                     <Input type="date" id="issue-date" className="bg-white border-neutral-200" />
@@ -260,7 +287,7 @@ export function InvoiceModal({ open, onOpenChange }: InvoiceModalProps) {
                 </div>
               </TabsContent>
               
-              <TabsContent value="preview" className="px-6 py-4 h-[calc(100%-64px)] overflow-auto">
+              <TabsContent value="preview" className="pt-4 pr-2">
                 <div className="bg-white border border-neutral-200 rounded-md p-8 max-w-[640px] mx-auto">
                   <div className="flex justify-between items-start">
                     <div>
@@ -275,7 +302,7 @@ export function InvoiceModal({ open, onOpenChange }: InvoiceModalProps) {
                     </div>
                   </div>
                   
-                  <div className="mt-10 grid grid-cols-2 gap-10">
+                  <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-10">
                     <div>
                       <div className="text-sm font-semibold text-neutral-500">BILL TO</div>
                       <div className="mt-1">
@@ -352,7 +379,7 @@ export function InvoiceModal({ open, onOpenChange }: InvoiceModalProps) {
                   </div>
                   
                   <div className="mt-8 pt-8 border-t border-neutral-200">
-                    <div className="grid grid-cols-2 gap-10">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                       <div>
                         <div className="text-sm font-semibold text-neutral-500">PAYMENT TERMS</div>
                         <div className="mt-1 text-sm">
@@ -375,35 +402,51 @@ export function InvoiceModal({ open, onOpenChange }: InvoiceModalProps) {
                   </div>
                 </div>
               </TabsContent>
-            </Tabs>
-          </div>
-
-          <SheetFooter className="border-t border-neutral-200 p-6 flex flex-row justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <Button variant="outline" size="icon" title="Print Invoice">
-                <Printer className="h-4 w-4" />
-              </Button>
-              <Button variant="outline" size="icon" title="Download PDF">
-                <Download className="h-4 w-4" />
-              </Button>
-              <Separator orientation="vertical" className="h-8" />
-              <Button variant="outline" size="icon" className="text-destructive hover:bg-destructive/10" title="Delete">
-                <Trash className="h-4 w-4" />
-              </Button>
             </div>
-            <div className="flex items-center gap-2">
-              <Button variant="outline" onClick={() => onOpenChange(false)}>
-                Cancel
-              </Button>
-              <Button variant="outline" className="border-[#F97316] text-[#F97316]" onClick={handleSave}>
-                Save Draft
-              </Button>
-              <Button className="bg-[#F97316] hover:bg-[#F97316]/90" onClick={handleSend}>
+          </Tabs>
+        </ScrollArea>
+
+        <SheetFooter className="border-t border-neutral-200 p-4 md:p-6 flex flex-col md:flex-row md:justify-between gap-4 bg-[#FEF2F2] flex-shrink-0">
+          {isMobile ? (
+            <>
+              <Button className="bg-[#F97316] hover:bg-[#F97316]/90 w-full text-white font-medium" onClick={handleSend}>
                 <Mail className="h-4 w-4 mr-2" /> Send Invoice
               </Button>
-            </div>
-          </SheetFooter>
-        </div>
+              <Button variant="outline" className="border-[#F97316] text-[#F97316] w-full" onClick={handleSave}>
+                Save Draft
+              </Button>
+              <Button variant="outline" onClick={() => onOpenChange(false)} className="w-full">
+                Cancel
+              </Button>
+            </>
+          ) : (
+            <>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="icon" title="Print Invoice">
+                  <Printer className="h-4 w-4" />
+                </Button>
+                <Button variant="outline" size="icon" title="Download PDF">
+                  <Download className="h-4 w-4" />
+                </Button>
+                <Separator orientation="vertical" className="h-8" />
+                <Button variant="outline" size="icon" className="text-destructive hover:bg-destructive/10" title="Delete">
+                  <Trash className="h-4 w-4" />
+                </Button>
+              </div>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" onClick={() => onOpenChange(false)}>
+                  Cancel
+                </Button>
+                <Button variant="outline" className="border-[#F97316] text-[#F97316]" onClick={handleSave}>
+                  Save Draft
+                </Button>
+                <Button className="bg-[#F97316] hover:bg-[#F97316]/90" onClick={handleSend}>
+                  <Mail className="h-4 w-4 mr-2" /> Send Invoice
+                </Button>
+              </div>
+            </>
+          )}
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   );

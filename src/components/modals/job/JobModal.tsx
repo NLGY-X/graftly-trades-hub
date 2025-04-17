@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { AlertTriangle, Check, Receipt, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { JobStatusTimeline } from "./JobStatusTimeline";
 import { JobDetailsTab } from "./JobDetailsTab";
@@ -43,48 +44,48 @@ export function JobModal({ open, onOpenChange }: JobModalProps) {
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent 
         side={isMobile ? "bottom" : "right"} 
-        size="md"
+        size="wide"
         className={cn(
-          isMobile ? "h-[90vh] rounded-t-xl pb-0 pt-4" : "p-0",
-          "bg-[#ECFDF5] border-l border-[#059669]/30"
+          isMobile ? "h-[95vh] rounded-t-xl p-0 inset-x-0 w-full" : "p-0",
+          "bg-[#ECFDF5] border-l border-[#059669]/30 overflow-hidden flex flex-col"
         )}
       >
-        <div className="flex flex-col h-full">
-          <div className="flex-shrink-0 p-4 md:p-6 border-b border-neutral-200">
-            <SheetHeader className="text-left">
-              {isMobile && (
-                <div className="mx-auto mb-4 h-1 w-[32px] rounded-full bg-[#059669]/30" />
-              )}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  {isMobile && (
-                    <Button 
-                      variant="ghost" 
-                      size="icon" 
-                      className="h-8 w-8 mr-2 -ml-2" 
-                      onClick={() => onOpenChange(false)}
-                    >
-                      <ArrowLeft className="h-4 w-4" />
-                      <span className="sr-only">Back</span>
-                    </Button>
-                  )}
-                  <SheetTitle className="text-[#059669]">Job Management</SheetTitle>
-                </div>
-                <div>
-                  {statusOptions.map(option => (
-                    option.value === status && (
-                      <Badge key={option.value} className={cn("ml-2", option.color)}>
-                        {option.label}
-                      </Badge>
-                    )
-                  ))}
-                </div>
+        <div className="flex-shrink-0 px-4 py-3 md:p-6 border-b border-neutral-200">
+          <SheetHeader className="text-left">
+            {isMobile && (
+              <div className="mx-auto mb-3 h-1 w-[32px] rounded-full bg-[#059669]/30" />
+            )}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                {isMobile && (
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className="h-8 w-8 mr-2 -ml-2" 
+                    onClick={() => onOpenChange(false)}
+                  >
+                    <ArrowLeft className="h-4 w-4" />
+                    <span className="sr-only">Back</span>
+                  </Button>
+                )}
+                <SheetTitle className="text-[#059669]">Job Management</SheetTitle>
               </div>
-              <SheetDescription>Schedule and manage job details</SheetDescription>
-            </SheetHeader>
-          </div>
+              <div>
+                {statusOptions.map(option => (
+                  option.value === status && (
+                    <Badge key={option.value} className={cn("ml-2", option.color)}>
+                      {option.label}
+                    </Badge>
+                  )
+                ))}
+              </div>
+            </div>
+            <SheetDescription>Schedule and manage job details</SheetDescription>
+          </SheetHeader>
+        </div>
 
-          <div className="flex-1 overflow-y-auto p-4 md:py-6 md:px-6">
+        <ScrollArea className="flex-1 px-4 md:px-6 py-2">
+          <div className="pr-2 space-y-6">
             {/* Status Timeline */}
             <div className="mb-6 overflow-x-auto pb-2">
               <JobStatusTimeline 
@@ -116,56 +117,56 @@ export function JobModal({ open, onOpenChange }: JobModalProps) {
                 </TabsList>
               )}
               
-              <TabsContent value="details" className="mt-6 space-y-6 focus:outline-none">
+              <TabsContent value="details" className="mt-6 focus:outline-none">
                 <JobDetailsTab />
               </TabsContent>
               
-              <TabsContent value="schedule" className="mt-6 space-y-6 focus:outline-none">
+              <TabsContent value="schedule" className="mt-6 focus:outline-none">
                 <JobScheduleTab date={date} setDate={setDate} />
               </TabsContent>
               
-              <TabsContent value="materials" className="mt-6 space-y-6 focus:outline-none">
+              <TabsContent value="materials" className="mt-6 focus:outline-none">
                 <JobMaterialsTab />
               </TabsContent>
               
-              <TabsContent value="notes" className="mt-6 space-y-6 focus:outline-none">
+              <TabsContent value="notes" className="mt-6 focus:outline-none">
                 <JobNotesTab />
               </TabsContent>
             </Tabs>
           </div>
+        </ScrollArea>
 
-          <SheetFooter className="border-t border-neutral-200 p-4 md:p-6 flex flex-col md:flex-row md:justify-between gap-4 bg-[#ECFDF5]">
-            {isMobile ? (
-              <>
-                <Button className="bg-[#059669] hover:bg-[#059669]/90 w-full text-white font-medium">
-                  Save Changes
-                </Button>
-                <Button variant="outline" className="gap-1 w-full">
+        <SheetFooter className="border-t border-neutral-200 p-4 md:p-6 flex flex-col md:flex-row md:justify-between gap-4 bg-[#ECFDF5] flex-shrink-0">
+          {isMobile ? (
+            <>
+              <Button className="bg-[#059669] hover:bg-[#059669]/90 w-full text-white font-medium">
+                Save Changes
+              </Button>
+              <Button variant="outline" className="gap-1 w-full">
+                <AlertTriangle className="h-4 w-4" />
+                Report Issue
+              </Button>
+              <Button variant="ghost" onClick={() => onOpenChange(false)} className="w-full">
+                Cancel
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button variant="outline" onClick={() => onOpenChange(false)}>
+                Cancel
+              </Button>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" className="gap-1">
                   <AlertTriangle className="h-4 w-4" />
                   Report Issue
                 </Button>
-                <Button variant="ghost" onClick={() => onOpenChange(false)} className="w-full">
-                  Cancel
+                <Button className="bg-[#059669] hover:bg-[#059669]/90">
+                  Save Changes
                 </Button>
-              </>
-            ) : (
-              <>
-                <Button variant="outline" onClick={() => onOpenChange(false)}>
-                  Cancel
-                </Button>
-                <div className="flex items-center gap-2">
-                  <Button variant="outline" className="gap-1">
-                    <AlertTriangle className="h-4 w-4" />
-                    Report Issue
-                  </Button>
-                  <Button className="bg-[#059669] hover:bg-[#059669]/90">
-                    Save Changes
-                  </Button>
-                </div>
-              </>
-            )}
-          </SheetFooter>
-        </div>
+              </div>
+            </>
+          )}
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   );
