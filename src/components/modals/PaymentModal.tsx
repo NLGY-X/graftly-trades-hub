@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription, DrawerFooter } from "@/components/ui/drawer";
@@ -40,7 +39,6 @@ export function PaymentModal({
     onOpenChange(false);
   };
   
-  // If mobile, render as a drawer (bottom sheet), otherwise as a dialog
   if (isMobile) {
     return (
       <Drawer open={open} onOpenChange={onOpenChange}>
