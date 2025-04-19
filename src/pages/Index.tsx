@@ -11,13 +11,13 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5 -z-10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/10 to-primary/20 -z-10" />
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="text-center">
-            <Badge variant="outline" className="mb-4">
+            <Badge variant="default" className="mb-4">
               Less Admin. More Graft.
             </Badge>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Free UK Tradespeople From Paperwork
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
@@ -30,7 +30,7 @@ const Index = () => {
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline">
+              <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/10">
                 See Our Features
               </Button>
               <Button size="lg" variant="secondary">
@@ -42,17 +42,20 @@ const Index = () => {
       </section>
 
       {/* Why Choose Section */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20 bg-blue-50/30">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <h2 className="text-3xl font-bold text-center mb-12">
+          <h2 className="text-3xl font-bold text-center mb-12 text-primary">
             Why UK Tradespeople Choose Graftly
           </h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {whyChooseItems.map((item, index) => (
-              <Card key={index} className="bg-card/50 backdrop-blur-sm hover:shadow-lg transition-shadow">
+              <Card 
+                key={index} 
+                className="bg-white shadow-lg hover:shadow-xl transition-shadow border-primary/20 hover:border-primary/40 border"
+              >
                 <CardHeader>
                   <CardTitle className="flex items-start gap-2">
-                    <Check className="text-primary h-6 w-6 flex-shrink-0" />
+                    <Check className="text-accent h-6 w-6 flex-shrink-0" />
                     {item.title}
                   </CardTitle>
                 </CardHeader>
@@ -66,22 +69,22 @@ const Index = () => {
       </section>
 
       {/* Comparison Table */}
-      <section className="py-20">
+      <section className="py-20 bg-blue-100/20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <h2 className="text-3xl font-bold text-center mb-12">How Graftly Compares</h2>
-          <div className="rounded-lg border bg-card">
+          <h2 className="text-3xl font-bold text-center mb-12 text-primary">How Graftly Compares</h2>
+          <div className="rounded-lg border bg-white shadow-md">
             <Table>
-              <TableHeader>
+              <TableHeader className="bg-primary/5">
                 <TableRow>
-                  <TableHead>Feature</TableHead>
-                  <TableHead>Graftly</TableHead>
-                  <TableHead>Tradify</TableHead>
-                  <TableHead>SimPro</TableHead>
+                  <TableHead className="text-primary">Feature</TableHead>
+                  <TableHead className="text-primary">Graftly</TableHead>
+                  <TableHead className="text-primary">Tradify</TableHead>
+                  <TableHead className="text-primary">SimPro</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {comparisonData.map((row, index) => (
-                  <TableRow key={index}>
+                  <TableRow key={index} className="hover:bg-blue-50/50">
                     <TableCell className="font-medium">{row.feature}</TableCell>
                     <TableCell>{row.graftly ? "✅" : "❌"}</TableCell>
                     <TableCell>{row.tradify ? "✅" : "❌"}</TableCell>
@@ -95,18 +98,21 @@ const Index = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20 bg-blue-50/30">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <h2 className="text-3xl font-bold text-center mb-12">
+          <h2 className="text-3xl font-bold text-center mb-12 text-primary">
             What UK Tradespeople Say About Graftly
           </h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="relative bg-card/50 backdrop-blur-sm">
+              <Card 
+                key={index} 
+                className="relative bg-white shadow-lg hover:shadow-xl transition-shadow border-accent/20 hover:border-accent/40 border"
+              >
                 <CardContent className="pt-6">
                   <Star className="absolute top-4 right-4 text-accent h-6 w-6" />
-                  <blockquote className="text-lg mb-4">"{testimonial.quote}"</blockquote>
-                  <footer className="text-sm text-muted-foreground">
+                  <blockquote className="text-lg mb-4 text-muted-foreground">"{testimonial.quote}"</blockquote>
+                  <footer className="text-sm text-primary/80">
                     <strong>{testimonial.name}</strong>
                     <br />
                     {testimonial.title}
@@ -119,23 +125,26 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-90" />
+      <section className="py-20 relative overflow-hidden bg-gradient-to-r from-primary to-accent">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 text-center text-white">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
             Ready to Save Time and Get Paid Faster?
           </h2>
           <p className="text-xl mb-8 text-white/90">
             Join thousands of UK tradespeople who've transformed their business with Graftly.
           </p>
           <div className="flex justify-center gap-4">
-            <Button size="lg" variant="secondary" asChild>
+            <Button size="lg" variant="secondary" asChild className="bg-white text-primary hover:bg-blue-50">
               <Link to="/dashboard">
                 Get Started Free
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/20">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-white text-white hover:bg-white/20"
+            >
               Book a Demo
             </Button>
           </div>
